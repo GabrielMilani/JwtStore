@@ -13,4 +13,10 @@ public class AccountControllers : ControllerBase
     {
         return (CommandResult)handler.Handle(command);
     }
+    [HttpGet("v1/accounts")]
+    public CommandResult Get([FromBody] AccountAuthenticateCommand command,
+                             [FromServices] AccountAuthenticateHandler handler)
+    {
+        return (CommandResult)handler.Handle(command);
+    }
 }
