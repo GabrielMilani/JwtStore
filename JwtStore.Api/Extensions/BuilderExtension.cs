@@ -1,8 +1,10 @@
 ﻿using JwtStore.Account;
 using JwtStore.Account.Handlers;
 using JwtStore.Account.Repositories;
+using JwtStore.Account.Services;
 using JwtStore.Infra.Data;
 using JwtStore.Infra.Repositories;
+using JwtStore.Infra.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -59,5 +61,9 @@ public static class BuilderExtension
         builder.Services.AddTransient<AccountCreateHandler, AccountCreateHandler>();
         builder.Services.AddTransient<IAccountAuthenticateRepository, AccountAuthenticateRepository>();
         builder.Services.AddTransient<AccountAuthenticateHandler, AccountAuthenticateHandler>();
+    }
+    public static void AddServices(this WebApplicationBuilder builder)
+    {
+        builder.Services.AddTransient<IAccountAuthenticateTokenService, AccountAuthenticateTokenService>();
     }
 }

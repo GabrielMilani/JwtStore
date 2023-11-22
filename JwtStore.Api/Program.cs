@@ -7,6 +7,7 @@ builder.AddDatabase();
 builder.AddJwtAuthentication();
 builder.AddControllers();
 builder.AddRepositories();
+builder.AddServices();
 
 var app = builder.Build();
 
