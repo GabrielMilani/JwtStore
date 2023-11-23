@@ -20,8 +20,8 @@ public class Product : Entity
         CategoryId = categoryId;
     }
 
-    public string Title { get; private set; }
-    public string Description { get; private set; }
+    public string Title { get; private set; } = string.Empty;
+    public string Description { get; private set; } = string.Empty;
     public decimal Price { get; private set; }
     public decimal QuantityOnHand { get; private set; }
     public DateTime CreateDate { get; private set; }

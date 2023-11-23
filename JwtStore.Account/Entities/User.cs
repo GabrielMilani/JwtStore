@@ -15,9 +15,9 @@ public class User : Entity
         Email = email;
         Password = password;
     }
-    public string Name { get; private set; }
-    public Email Email { get; private set; }
-    public Password Password { get; private set; }
+    public string Name { get; private set; } = string.Empty;
+    public Email Email { get; private set; } = null!;
+    public Password Password { get; private set; } = null!;
 
     public void UpdatePassword(string newPassword, string code)
     {

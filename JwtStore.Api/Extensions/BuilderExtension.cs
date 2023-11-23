@@ -1,10 +1,10 @@
-﻿using JwtStore.Account;
-using JwtStore.Account.Handlers;
+﻿using JwtStore.Account.Handlers;
 using JwtStore.Account.Repositories;
 using JwtStore.Account.Services;
 using JwtStore.Infra.Data;
 using JwtStore.Infra.Repositories;
 using JwtStore.Infra.Services;
+using JwtStore.Shared;
 using JwtStore.Stock.Handlers;
 using JwtStore.Stock.Repositories;
 using Microsoft.AspNetCore.Authentication.JwtBearer;

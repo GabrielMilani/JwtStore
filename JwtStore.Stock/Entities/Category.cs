@@ -13,7 +13,7 @@ public class Category : Entity
         Title = title;
     }
 
-    public string Title { get; private set; }
+    public string Title { get; private set; } = string.Empty;
     public List<Product> Products { get; set; } = new();
 
     public void UpdateTitleCategory(string newTitle)

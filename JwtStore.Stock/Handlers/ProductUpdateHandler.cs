@@ -22,11 +22,11 @@ public class ProductUpdateHandler : Notifiable<Notification>, IHandler<ProductUp
         {
             command.Validate();
             if (!command.IsValid)
-                return new CommandResultStock();
+                return new CommandResult();
         }
         catch
         {
-            return new CommandResultStock();
+            return new CommandResult();
         }
         Product product;
         try
@@ -40,7 +40,7 @@ public class ProductUpdateHandler : Notifiable<Notification>, IHandler<ProductUp
         }
         catch
         {
-            return new CommandResultStock(false, "Falha ao alterar dados do produto!");
+            return new CommandResult(false, "Falha ao alterar dados do produto!");
         }
         try
         {
@@ -48,8 +48,8 @@ public class ProductUpdateHandler : Notifiable<Notification>, IHandler<ProductUp
         }
         catch
         {
-            return new CommandResultStock(false, "Falha ao Salvar alteracao o produto!");
+            return new CommandResult(false, "Falha ao Salvar alteracao o produto!");
         }
-        return new CommandResultStock(true, "Produto alterado com sucesso!", product);
+        return new CommandResult(true, "Produto alterado com sucesso!", product);
     }
 }

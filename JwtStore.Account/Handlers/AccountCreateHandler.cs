@@ -41,7 +41,7 @@ public class AccountCreateHandler : Notifiable<Notification>, IHandler<AccountCr
             password = new Password(command.Password);
             user = new User(command.Name, email, password);
         }
-        catch (Exception ex)
+        catch
         {
             return new CommandResult(false, "Ops, falha ao cadastrar Usuário!", command.Notifications);
         }

@@ -10,9 +10,7 @@ public class ProductUpdateRepository : IProductUpdateRepository
     private readonly AppDbContext _context;
 
     public ProductUpdateRepository(AppDbContext context)
-    {
-        _context = context;
-    }
+        => _context = context;
 
     public Product GetProductById(Guid productId)
     {

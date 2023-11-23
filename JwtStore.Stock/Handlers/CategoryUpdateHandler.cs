@@ -21,11 +21,11 @@ public class CategoryUpdateHandler : Notifiable<Notification>, IHandler<Category
         {
             command.Validate();
             if (!command.IsValid)
-                return new CommandResultStock();
+                return new CommandResult();
         }
         catch
         {
-            return new CommandResultStock();
+            return new CommandResult();
         }
         Category category;
         try
@@ -35,7 +35,7 @@ public class CategoryUpdateHandler : Notifiable<Notification>, IHandler<Category
         }
         catch
         {
-            return new CommandResultStock(false, "Falha ao alterar categoria!");
+            return new CommandResult(false, "Falha ao alterar categoria!");
         }
         try
         {
@@ -43,8 +43,8 @@ public class CategoryUpdateHandler : Notifiable<Notification>, IHandler<Category
         }
         catch
         {
-            return new CommandResultStock(false, "Falha ao salvar alteração categoria!");
+            return new CommandResult(false, "Falha ao salvar alteração categoria!");
         }
-        return new CommandResultStock(true, "Categoria Alterada com sucesso!", category);
+        return new CommandResult(true, "Categoria Alterada com sucesso!", category);
     }
 }

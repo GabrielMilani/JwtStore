@@ -1,4 +1,5 @@
-﻿using JwtStore.Stock.Commands;
+﻿using JwtStore.Shared.Commands;
+using JwtStore.Stock.Commands;
 using JwtStore.Stock.Handlers;
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,16 +9,16 @@ namespace JwtStore.Api.Controllers;
 public class StockControllers : ControllerBase
 {
     [HttpPost("v1/stock/categories")]
-    public CommandResultStock Post([FromBody] CategoryCreateCommand command,
+    public CommandResult Post([FromBody] CategoryCreateCommand command,
                                    [FromServices] CategoryCreateHandler handler)
     {
-        return (CommandResultStock)handler.Handle(command);
+        return (CommandResult)handler.Handle(command);
     }
     [HttpPost("v1/stock/products")]
-    public CommandResultStock Post([FromBody] ProductCreateCommand command,
+    public CommandResult Post([FromBody] ProductCreateCommand command,
                                    [FromServices] ProductCreateHandler handler)
     {
-        return (CommandResultStock)handler.Handle(command);
+        return (CommandResult)handler.Handle(command);
     }
 
 

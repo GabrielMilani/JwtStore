@@ -1,4 +1,4 @@
-﻿namespace JwtStore.Account;
+﻿namespace JwtStore.Shared;
 
 public static class Configuration
 {

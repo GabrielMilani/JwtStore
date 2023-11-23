@@ -21,11 +21,11 @@ public class CategoryCreateHandler : Notifiable<Notification>, IHandler<Category
         {
             command.Validate();
             if (!command.IsValid)
-                return new CommandResultStock();
+                return new CommandResult();
         }
         catch
         {
-            return new CommandResultStock();
+            return new CommandResult();
         }
         Category category;
         try
@@ -34,7 +34,7 @@ public class CategoryCreateHandler : Notifiable<Notification>, IHandler<Category
         }
         catch
         {
-            return new CommandResultStock(false, "Falha ao criar categoria!");
+            return new CommandResult(false, "Falha ao criar categoria!");
         }
         try
         {
@@ -42,8 +42,8 @@ public class CategoryCreateHandler : Notifiable<Notification>, IHandler<Category
         }
         catch
         {
-            return new CommandResultStock(false, "Falha ao salvar categoria!");
+            return new CommandResult(false, "Falha ao salvar categoria!");
         }
-        return new CommandResultStock(true, "Categoria criada com sucesso!", category);
+        return new CommandResult(true, "Categoria criada com sucesso!", category);
     }
 }

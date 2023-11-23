@@ -1,5 +1,6 @@
 ﻿using JwtStore.Account.Commands;
 using JwtStore.Account.Handlers;
+using JwtStore.Shared.Commands;
 using Microsoft.AspNetCore.Mvc;
 
 namespace JwtStore.Api.Controllers;

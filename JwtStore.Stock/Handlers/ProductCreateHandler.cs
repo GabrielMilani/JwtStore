@@ -22,11 +22,11 @@ public class ProductCreateHandler : Notifiable<Notification>, IHandler<ProductCr
         {
             command.Validate();
             if (!command.IsValid)
-                return new CommandResultStock();
+                return new CommandResult();
         }
         catch
         {
-            return new CommandResultStock();
+            return new CommandResult();
         }
         Product product;
         try
@@ -36,7 +36,7 @@ public class ProductCreateHandler : Notifiable<Notification>, IHandler<ProductCr
         }
         catch
         {
-            return new CommandResultStock(false, "Falha ao criar o produto!");
+            return new CommandResult(false, "Falha ao criar o produto!");
         }
         try
         {
@@ -44,8 +44,8 @@ public class ProductCreateHandler : Notifiable<Notification>, IHandler<ProductCr
         }
         catch
         {
-            return new CommandResultStock(false, "Falha ao Salvar o produto!");
+            return new CommandResult(false, "Falha ao Salvar o produto!");
         }
-        return new CommandResultStock(true, "Produto cadastrado com sucesso!", product);
+        return new CommandResult(true, "Produto cadastrado com sucesso!", product);
     }
 }

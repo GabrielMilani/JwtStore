@@ -9,9 +9,7 @@ public class ProductCreateRepository : IProductCreateRepository
     private readonly AppDbContext _context;
 
     public ProductCreateRepository(AppDbContext context)
-    {
-        _context = context;
-    }
+        => _context = context;
 
     public async Task SaveAsync(Product product)
     {

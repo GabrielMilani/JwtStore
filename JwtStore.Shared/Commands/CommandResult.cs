@@ -1,25 +1,23 @@
-﻿using JwtStore.Shared.Commands;
+﻿namespace JwtStore.Shared.Commands;
 
-namespace JwtStore.Stock.Commands;
-
-public class CommandResultStock : ICommandResult
+public class CommandResult : ICommandResult
 {
-    public CommandResultStock() { }
+    public CommandResult() { }
 
-    public CommandResultStock(bool? success, string? message)
+    public CommandResult(bool? success, string? message)
     {
         Success = success;
         Message = message;
     }
 
-    public CommandResultStock(bool? success, string? message, object? data)
+    public CommandResult(bool? success, string? message, object? data)
     {
         Success = success;
         Message = message;
         Data = data;
     }
 
-    public CommandResultStock(bool? success, string? message, string? token, object? data)
+    public CommandResult(bool? success, string? message, string? token, object? data)
     {
         Success = success;
         Message = message;

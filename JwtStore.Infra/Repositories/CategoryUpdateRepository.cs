@@ -10,9 +10,7 @@ public class CategoryUpdateRepository : ICategoryUpdateRepository
     private readonly AppDbContext _context;
 
     public CategoryUpdateRepository(AppDbContext context)
-    {
-        _context = context;
-    }
+        => _context = context;
 
     public Category GetCategoryById(Guid categoryId)
     {
