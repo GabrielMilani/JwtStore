@@ -5,6 +5,8 @@ using JwtStore.Account.Services;
 using JwtStore.Infra.Data;
 using JwtStore.Infra.Repositories;
 using JwtStore.Infra.Services;
+using JwtStore.Stock.Handlers;
+using JwtStore.Stock.Repositories;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -61,6 +63,14 @@ public static class BuilderExtension
         builder.Services.AddTransient<AccountCreateHandler, AccountCreateHandler>();
         builder.Services.AddTransient<IAccountAuthenticateRepository, AccountAuthenticateRepository>();
         builder.Services.AddTransient<AccountAuthenticateHandler, AccountAuthenticateHandler>();
+        builder.Services.AddTransient<ICategoryCreateRepository, CategoryCreateRepository>();
+        builder.Services.AddTransient<CategoryCreateHandler, CategoryCreateHandler>();
+        builder.Services.AddTransient<ICategoryUpdateRepository, CategoryUpdateRepository>();
+        builder.Services.AddTransient<CategoryUpdateHandler, CategoryUpdateHandler>();
+        builder.Services.AddTransient<IProductCreateRepository, ProductCreateRepository>();
+        builder.Services.AddTransient<ProductCreateHandler, ProductCreateHandler>();
+        builder.Services.AddTransient<IProductUpdateRepository, ProductUpdateRepository>();
+        builder.Services.AddTransient<ProductUpdateHandler, ProductUpdateHandler>();
     }
     public static void AddServices(this WebApplicationBuilder builder)
     {

@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JwtStore.Test", "JwtStore.T
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JwtStore.Api", "JwtStore.Api\JwtStore.Api.csproj", "{DCE5A026-B3F3-4993-B7A6-923A0CD98BDC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JwtStore.Stock", "JwtStore.Stock\JwtStore.Stock.csproj", "{CDDE1311-69F3-4C34-A82D-DBB879C87C82}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -42,5 +44,9 @@ Global
 		{DCE5A026-B3F3-4993-B7A6-923A0CD98BDC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DCE5A026-B3F3-4993-B7A6-923A0CD98BDC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DCE5A026-B3F3-4993-B7A6-923A0CD98BDC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CDDE1311-69F3-4C34-A82D-DBB879C87C82}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CDDE1311-69F3-4C34-A82D-DBB879C87C82}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CDDE1311-69F3-4C34-A82D-DBB879C87C82}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CDDE1311-69F3-4C34-A82D-DBB879C87C82}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
