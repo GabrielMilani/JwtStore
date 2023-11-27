@@ -12,11 +12,9 @@ public class ProductUpdateRepository : IProductUpdateRepository
     public ProductUpdateRepository(AppDbContext context)
         => _context = context;
 
-    public Product GetProductById(Guid productId)
-    {
-        return _context.Products.AsNoTracking().First(x => x.Id == productId);
-    }
-
+    public async Task<Product?> GetProductByIdAsync(Guid productId)
+        => await _context.Products.AsNoTracking().FirstOrDefaultAsync(x => x.Id == productId);
+    
     public async Task SaveAsync(Product product)
     {
         await _context.Products.AddAsync(product);

@@ -4,6 +4,6 @@ namespace JwtStore.Stock.Repositories;
 
 public interface ICategoryUpdateRepository
 {
-    Category GetCategoryById(Guid categoryId);
+    Task<Category?> GetCategoryByIdAsync(Guid categoryId);
     Task SaveAsync(Category category);
 }

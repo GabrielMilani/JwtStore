@@ -1,10 +1,12 @@
 ﻿using JwtStore.Shared.Commands;
 using JwtStore.Stock.Commands;
 using JwtStore.Stock.Handlers;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace JwtStore.Api.Controllers;
 
+[Authorize]
 [ApiController]
 public class StockControllers : ControllerBase
 {

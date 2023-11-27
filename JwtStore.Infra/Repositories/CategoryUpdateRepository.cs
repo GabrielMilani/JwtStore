@@ -12,9 +12,9 @@ public class CategoryUpdateRepository : ICategoryUpdateRepository
     public CategoryUpdateRepository(AppDbContext context)
         => _context = context;
 
-    public Category GetCategoryById(Guid categoryId)
+    public async Task<Category?> GetCategoryByIdAsync(Guid categoryId)
     {
-        return _context.Categories.AsNoTracking().First(x => x.Id == categoryId);
+        return await _context.Categories.AsNoTracking().FirstOrDefaultAsync(x => x.Id == categoryId);
     }
 
     public async Task SaveAsync(Category category)

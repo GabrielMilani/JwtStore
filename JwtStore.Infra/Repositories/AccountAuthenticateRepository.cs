@@ -10,7 +10,7 @@ public class AccountAuthenticateRepository : IAccountAuthenticateRepository
     private readonly AppDbContext _context;
     public AccountAuthenticateRepository(AppDbContext context)
         => _context = context;
-    public User? GetUserByEmailAsync(string email)
-        => _context.Users.AsNoTracking().FirstOrDefault(x => x.Email.Address == email);
+    public async Task<User?> GetUserByEmailAsync(string email)
+        => await _context.Users.AsNoTracking().FirstOrDefaultAsync(x => x.Email.Address == email);
 
 }

@@ -5,6 +5,7 @@ using JwtStore.Account.Repositories;
 using JwtStore.Account.ValueObjects;
 using JwtStore.Shared.Commands;
 using JwtStore.Shared.Handlers;
+using SecureIdentity.Password;
 
 namespace JwtStore.Account.Handlers;
 
@@ -38,7 +39,7 @@ public class AccountCreateHandler : Notifiable<Notification>, IHandler<AccountCr
         try
         {
             email = new Email(command.Email);
-            password = new Password(command.Password);
+            password = new Password(PasswordHasher.Hash(command.Password));
             user = new User(command.Name, email, password);
         }
         catch

@@ -28,10 +28,12 @@ public class ProductUpdateHandler : Notifiable<Notification>, IHandler<ProductUp
         {
             return new CommandResult();
         }
-        Product product;
+        Product? product;
         try
         {
-            product = _productUpdateRepository.GetProductById(command.Id);
+            product = _productUpdateRepository.GetProductByIdAsync(command.Id).Result;
+            if (product is null)
+                return new CommandResult(false, "Falha ao alterar produto!");
             product.UpdateTitleProduct(command.Title);
             product.UpdateDescriptionProduct(command.Description);
             product.UpdatePriceProduct(command.Price);

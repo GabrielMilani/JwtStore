@@ -4,5 +4,5 @@ namespace JwtStore.Account.Repositories;
 
 public interface IAccountAuthenticateRepository
 {
-    User? GetUserByEmailAsync(string email);
+    Task<User?> GetUserByEmailAsync(string email);
 }

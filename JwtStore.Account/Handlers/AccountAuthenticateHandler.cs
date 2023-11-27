@@ -3,6 +3,7 @@ using JwtStore.Account.Commands;
 using JwtStore.Account.Entities;
 using JwtStore.Account.Repositories;
 using JwtStore.Account.Services;
+using JwtStore.Shared;
 using JwtStore.Shared.Commands;
 using JwtStore.Shared.Handlers;
 using SecureIdentity.Password;
@@ -36,7 +37,7 @@ public class AccountAuthenticateHandler : Notifiable<Notification>, IHandler<Acc
         User? user;
         try
         {
-            user = _repositoryAccountAuthenticate.GetUserByEmailAsync(command.Email);
+            user = _repositoryAccountAuthenticate.GetUserByEmailAsync(command.Email).Result;
             if (user is null)
                 return new CommandResult(false, "Perfil não encontrado", command.Notifications);
         }
@@ -46,9 +47,8 @@ public class AccountAuthenticateHandler : Notifiable<Notification>, IHandler<Acc
         }
         try
         {
-            if (!PasswordHasher.Verify(command.Password, user.Password.Hash))
-                if (user is null)
-                    return new CommandResult(false, "Senha inválida", command.Notifications);
+            if (!PasswordHasher.Verify(user.Password.Hash, command.Password))
+                return new CommandResult(false, "Senha inválida", command.Notifications);
         }
         catch
         {

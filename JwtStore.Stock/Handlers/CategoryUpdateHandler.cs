@@ -27,10 +27,12 @@ public class CategoryUpdateHandler : Notifiable<Notification>, IHandler<Category
         {
             return new CommandResult();
         }
-        Category category;
+        Category? category;
         try
         {
-            category = _categoryUpdateReposiroty.GetCategoryById(command.Id);
+            category = _categoryUpdateReposiroty.GetCategoryByIdAsync(command.Id).Result;
+            if (category is null)
+                return new CommandResult(false, "Falha ao alterar categoria!");
             category.UpdateTitleCategory(command.Title);
         }
         catch

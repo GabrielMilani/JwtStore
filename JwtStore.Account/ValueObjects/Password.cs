@@ -7,7 +7,7 @@ public class Password : ValueObject
 {
     public Password(string hash)
     {
-        Hash = PasswordHasher.Hash(hash);
+        Hash = hash;
     }
     public string Hash { get; }
     public string ResetCode { get; } = Guid.NewGuid().ToString("N")[..8].ToUpper();

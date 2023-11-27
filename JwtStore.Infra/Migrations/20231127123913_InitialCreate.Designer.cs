@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace JwtStore.Infra.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20231123115316_InitialCreate")]
+    [Migration("20231127123913_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
