@@ -71,6 +71,10 @@ public static class BuilderExtension
         builder.Services.AddTransient<ProductCreateHandler, ProductCreateHandler>();
         builder.Services.AddTransient<IProductUpdateRepository, ProductUpdateRepository>();
         builder.Services.AddTransient<ProductUpdateHandler, ProductUpdateHandler>();
+        builder.Services.AddTransient<IAccountAddRoleRepository, AccountAddRoleRepository>();
+        builder.Services.AddTransient<AccountAddRoleHandler, AccountAddRoleHandler>();
+        builder.Services.AddTransient<IAccountRoleCreateRepository, AccountRoleCreateRepository>();
+        builder.Services.AddTransient<AccountRoleCreateHandler, AccountRoleCreateHandler>();
     }
     public static void AddServices(this WebApplicationBuilder builder)
     {

@@ -33,6 +33,11 @@ public class AccountAuthenticateTokenService : IAccountAuthenticateTokenService
         var claimsIdent = new ClaimsIdentity();
         claimsIdent.AddClaim(new Claim(ClaimTypes.GivenName, user.Name));
         claimsIdent.AddClaim(new Claim(ClaimTypes.Name, user.Email));
+        foreach (var role in user.Roles)
+        {
+            claimsIdent.AddClaim(new Claim(ClaimTypes.Role, role.Title));
+        }
+
 
         return claimsIdent;
     }
