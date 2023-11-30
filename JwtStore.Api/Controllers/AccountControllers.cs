@@ -9,10 +9,10 @@ namespace JwtStore.Api.Controllers;
 public class AccountControllers : ControllerBase
 {
     [HttpPost("v1/accounts")]
-    public CommandResult Post([FromBody] AccountCreateCommand command,
-        [FromServices] AccountCreateHandler handler)
+    public CommandResult Post([FromBody] AccountCreateUserCommand userCommand,
+        [FromServices] AccountCreateUserHandler userHandler)
     {
-        return (CommandResult)handler.Handle(command);
+        return (CommandResult)userHandler.Handle(userCommand);
     }
 
     [HttpGet("v1/accounts")]
@@ -23,14 +23,14 @@ public class AccountControllers : ControllerBase
     }
 
     [HttpPost("v1/accounts/roles")]
-    public CommandResult Get([FromBody] AccountRoleCreateCommand command,
-                            [FromServices] AccountRoleCreateHandler handler)
+    public CommandResult Get([FromBody] AccountCreateRoleCommand command,
+                            [FromServices] AccountCreateRoleHandler handler)
     {
         return (CommandResult)handler.Handle(command);
     }
     [HttpPut("v1/accounts/roles")]
-    public CommandResult Get([FromBody] AccountAddRoleCommand command,
-                            [FromServices] AccountAddRoleHandler handler)
+    public CommandResult Get([FromBody] AccountInsertRoleCommand command,
+                            [FromServices] AccountInsertRoleHandler handler)
     {
         return (CommandResult)handler.Handle(command);
     }

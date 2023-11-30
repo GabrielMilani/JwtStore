@@ -18,6 +18,7 @@ public class ProductUpdateHandler : Notifiable<Notification>, IHandler<ProductUp
 
     public ICommandResult Handle(ProductUpdateCommand command)
     {
+        #region 01. Valida a requisição.
         try
         {
             command.Validate();
@@ -28,6 +29,9 @@ public class ProductUpdateHandler : Notifiable<Notification>, IHandler<ProductUp
         {
             return new CommandResult();
         }
+        #endregion
+
+        #region 02. Recebe ID e dados alterados do produto e realiza a alteração.
         Product? product;
         try
         {
@@ -44,6 +48,9 @@ public class ProductUpdateHandler : Notifiable<Notification>, IHandler<ProductUp
         {
             return new CommandResult(false, "Falha ao alterar dados do produto!");
         }
+        #endregion
+
+        #region 03. Persiste dados alterados do produto.
         try
         {
             _productUpdateRepository.SaveAsync(product);
@@ -52,6 +59,8 @@ public class ProductUpdateHandler : Notifiable<Notification>, IHandler<ProductUp
         {
             return new CommandResult(false, "Falha ao Salvar alteracao o produto!");
         }
+        #endregion
+
         return new CommandResult(true, "Produto alterado com sucesso!", product);
     }
 }

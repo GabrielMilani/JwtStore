@@ -5,14 +5,16 @@ using Microsoft.EntityFrameworkCore;
 
 namespace JwtStore.Infra.Repositories;
 
-public class AccountCreateRepository : IAccountCreateRepository
+public class AccountCreateUserRepository : IAccountCreateUserRepository
 {
     private readonly AppDbContext _context;
 
-    public AccountCreateRepository(AppDbContext context)
+    public AccountCreateUserRepository(AppDbContext context)
         => _context = context;
     public async Task<bool> AnyAsync(string email)
-        => await _context.Users.AsNoTracking().AnyAsync(x => x.Email.Address == email);
+        => await _context.Users
+            .AsNoTracking()
+            .AnyAsync(x => x.Email.Address == email);
 
     public async Task SaveAsync(User user)
     {

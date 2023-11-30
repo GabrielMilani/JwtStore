@@ -6,10 +6,10 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace JwtStore.Api.Controllers;
 
-[Authorize]
 [ApiController]
 public class StockControllers : ControllerBase
 {
+    [Authorize(Roles = "ADMIN")]
     [HttpPost("v1/stock/categories")]
     public CommandResult Post([FromBody] CategoryCreateCommand command,
                                    [FromServices] CategoryCreateHandler handler)

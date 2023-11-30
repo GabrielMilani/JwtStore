@@ -14,7 +14,7 @@ public class AccountAuthenticateTokenService : IAccountAuthenticateTokenService
     {
 
         var tokenHandler = new JwtSecurityTokenHandler();
-        var key = Encoding.ASCII.GetBytes(Configuration.Secrets.ApiKey);
+        var key = Encoding.ASCII.GetBytes(Configuration.Secrets.JwtPrivateKey);
         var tokenDescriptor = new SecurityTokenDescriptor
         {
             Subject = GenerateClaims(user),

@@ -17,6 +17,7 @@ public class CategoryCreateHandler : Notifiable<Notification>, IHandler<Category
     }
     public ICommandResult Handle(CategoryCreateCommand command)
     {
+        #region 01. Valida a requisição.
         try
         {
             command.Validate();
@@ -27,6 +28,9 @@ public class CategoryCreateHandler : Notifiable<Notification>, IHandler<Category
         {
             return new CommandResult();
         }
+        #endregion
+
+        #region 02. Recebe dados da categoria.
         Category category;
         try
         {
@@ -36,6 +40,9 @@ public class CategoryCreateHandler : Notifiable<Notification>, IHandler<Category
         {
             return new CommandResult(false, "Falha ao criar categoria!");
         }
+        #endregion
+
+        #region 03. Persiste categoria no banco.
         try
         {
             _categoryCreateReposiroty.SaveAsync(category);
@@ -44,6 +51,8 @@ public class CategoryCreateHandler : Notifiable<Notification>, IHandler<Category
         {
             return new CommandResult(false, "Falha ao salvar categoria!");
         }
+        #endregion
+
         return new CommandResult(true, "Categoria criada com sucesso!", category);
     }
 }

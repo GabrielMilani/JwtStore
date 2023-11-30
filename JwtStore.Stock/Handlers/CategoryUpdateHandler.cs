@@ -17,6 +17,7 @@ public class CategoryUpdateHandler : Notifiable<Notification>, IHandler<Category
     }
     public ICommandResult Handle(CategoryUpdateCommand command)
     {
+        #region 01. Valida a requisição.
         try
         {
             command.Validate();
@@ -27,6 +28,9 @@ public class CategoryUpdateHandler : Notifiable<Notification>, IHandler<Category
         {
             return new CommandResult();
         }
+        #endregion
+
+        #region 02. Busca dados da categoria.
         Category? category;
         try
         {
@@ -39,6 +43,9 @@ public class CategoryUpdateHandler : Notifiable<Notification>, IHandler<Category
         {
             return new CommandResult(false, "Falha ao alterar categoria!");
         }
+        #endregion
+
+        #region 03. Persiste dados alterados no banco.
         try
         {
             _categoryUpdateReposiroty.SaveAsync(category);
@@ -47,6 +54,8 @@ public class CategoryUpdateHandler : Notifiable<Notification>, IHandler<Category
         {
             return new CommandResult(false, "Falha ao salvar alteração categoria!");
         }
+        #endregion
+
         return new CommandResult(true, "Categoria Alterada com sucesso!", category);
     }
 }

@@ -14,12 +14,14 @@ public class CategoryUpdateRepository : ICategoryUpdateRepository
 
     public async Task<Category?> GetCategoryByIdAsync(Guid categoryId)
     {
-        return await _context.Categories.AsNoTracking().FirstOrDefaultAsync(x => x.Id == categoryId);
+        return await _context.Categories
+            .AsNoTracking()
+            .FirstOrDefaultAsync(x => x.Id == categoryId);
     }
 
-    public void SaveAsync(Category category)
+    public async Task SaveAsync(Category category)
     {
         _context.Entry(category).State = EntityState.Modified;
-        _context.SaveChanges();
+        await _context.SaveChangesAsync();
     }
 }

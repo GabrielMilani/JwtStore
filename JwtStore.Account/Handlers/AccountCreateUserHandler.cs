@@ -9,16 +9,16 @@ using SecureIdentity.Password;
 
 namespace JwtStore.Account.Handlers;
 
-public class AccountCreateHandler : Notifiable<Notification>, IHandler<AccountCreateCommand>
+public class AccountCreateUserHandler : Notifiable<Notification>, IHandler<AccountCreateUserCommand>
 {
-    private readonly IAccountCreateRepository _repositoryAccountCreate;
+    private readonly IAccountCreateUserRepository _userRepositoryAccountCreateUser;
 
-    public AccountCreateHandler(IAccountCreateRepository repositoryAccountCreate)
+    public AccountCreateUserHandler(IAccountCreateUserRepository userRepositoryAccountCreateUser)
     {
-        _repositoryAccountCreate = repositoryAccountCreate;
+        _userRepositoryAccountCreateUser = userRepositoryAccountCreateUser;
     }
 
-    public ICommandResult Handle(AccountCreateCommand command)
+    public ICommandResult Handle(AccountCreateUserCommand command)
     {
         #region 01. Valida a requisição.
         try
@@ -53,7 +53,7 @@ public class AccountCreateHandler : Notifiable<Notification>, IHandler<AccountCr
         #region 03. Valida se email ja existe cadastrado. 
         try
         {
-            var exists = _repositoryAccountCreate.AnyAsync(command.Email);
+            var exists = _userRepositoryAccountCreateUser.AnyAsync(command.Email);
             if (exists.Result)
                 return new CommandResult(false, "Ops, falha E-mail já cadastrado!", command.Notifications);
         }
@@ -66,7 +66,7 @@ public class AccountCreateHandler : Notifiable<Notification>, IHandler<AccountCr
         #region 04. Persiste o perfil do usuário no banco.
         try
         {
-            _repositoryAccountCreate.SaveAsync(user);
+            _userRepositoryAccountCreateUser.SaveAsync(user);
         }
         catch
         {

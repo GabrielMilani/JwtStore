@@ -7,16 +7,16 @@ using JwtStore.Shared.Handlers;
 
 namespace JwtStore.Account.Handlers;
 
-public class AccountRoleCreateHandler : Notifiable<Notification>, IHandler<AccountRoleCreateCommand>
+public class AccountCreateRoleHandler : Notifiable<Notification>, IHandler<AccountCreateRoleCommand>
 {
-    private readonly IAccountRoleCreateRepository _repositoryAccountRoleCreate;
+    private readonly IAccountCreateRoleRepository _repositoryAccountCreateRole;
 
-    public AccountRoleCreateHandler(IAccountRoleCreateRepository repositoryAccountRoleCreate)
+    public AccountCreateRoleHandler(IAccountCreateRoleRepository repositoryAccountCreateRole)
     {
-        _repositoryAccountRoleCreate = repositoryAccountRoleCreate;
+        _repositoryAccountCreateRole = repositoryAccountCreateRole;
     }
 
-    public ICommandResult Handle(AccountRoleCreateCommand command)
+    public ICommandResult Handle(AccountCreateRoleCommand command)
     {
         #region 01. Valida a requisição.
         try
@@ -46,7 +46,7 @@ public class AccountRoleCreateHandler : Notifiable<Notification>, IHandler<Accou
         #region 03. Valida se titulo do role ja cadastrado.
         try
         {
-            var exists = _repositoryAccountRoleCreate.AnyAsync(command.Title);
+            var exists = _repositoryAccountCreateRole.AnyAsync(command.Title);
             if (exists.Result)
                 return new CommandResult(false, "Ops, falha role já cadastrado!", command.Notifications);
         }
@@ -59,7 +59,7 @@ public class AccountRoleCreateHandler : Notifiable<Notification>, IHandler<Accou
         #region 04. Persiste role no banco.
         try
         {
-            _repositoryAccountRoleCreate.SaveAsync(role);
+            _repositoryAccountCreateRole.SaveAsync(role);
         }
         catch
         {

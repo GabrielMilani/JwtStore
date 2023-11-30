@@ -18,6 +18,7 @@ public class ProductCreateHandler : Notifiable<Notification>, IHandler<ProductCr
 
     public ICommandResult Handle(ProductCreateCommand command)
     {
+        #region 01. Valida a requisição.
         try
         {
             command.Validate();
@@ -28,6 +29,9 @@ public class ProductCreateHandler : Notifiable<Notification>, IHandler<ProductCr
         {
             return new CommandResult();
         }
+        #endregion
+
+        #region 02. Recebe dados do produto.
         Product product;
         try
         {
@@ -38,6 +42,9 @@ public class ProductCreateHandler : Notifiable<Notification>, IHandler<ProductCr
         {
             return new CommandResult(false, "Falha ao criar o produto!");
         }
+        #endregion
+
+        #region 03. Persiste da dos do produto no banco.
         try
         {
             _productCreateRepository.SaveAsync(product);
@@ -46,6 +53,8 @@ public class ProductCreateHandler : Notifiable<Notification>, IHandler<ProductCr
         {
             return new CommandResult(false, "Falha ao Salvar o produto!");
         }
+        #endregion
+
         return new CommandResult(true, "Produto cadastrado com sucesso!", product);
     }
 }

@@ -4,9 +4,9 @@ using JwtStore.Shared.Commands;
 
 namespace JwtStore.Account.Commands;
 
-public class AccountCreateCommand : Notifiable<Notification>, ICommand
+public class AccountCreateUserCommand : Notifiable<Notification>, ICommand
 {
-    public AccountCreateCommand(string name, string email, string password)
+    public AccountCreateUserCommand(string name, string email, string password)
     {
         Name = name;
         Email = email;

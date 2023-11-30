@@ -13,8 +13,9 @@ public class ProductUpdateRepository : IProductUpdateRepository
         => _context = context;
 
     public async Task<Product?> GetProductByIdAsync(Guid productId)
-        => await _context.Products.AsNoTracking().FirstOrDefaultAsync(x => x.Id == productId);
-    
+        => await _context.Products.AsNoTracking()
+            .FirstOrDefaultAsync(x => x.Id == productId);
+
     public async Task SaveAsync(Product product)
     {
         await _context.Products.AddAsync(product);

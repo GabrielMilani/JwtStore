@@ -7,16 +7,16 @@ using JwtStore.Shared.Handlers;
 
 namespace JwtStore.Account.Handlers;
 
-public class AccountAddRoleHandler : Notifiable<Notification>, IHandler<AccountAddRoleCommand>
+public class AccountInsertRoleHandler : Notifiable<Notification>, IHandler<AccountInsertRoleCommand>
 {
-    private readonly IAccountAddRoleRepository _repositoryAccountAddRole;
+    private readonly IAccountInsertRoleRepository _repositoryAccountInsertRole;
 
-    public AccountAddRoleHandler(IAccountAddRoleRepository repositoryAccountAddRole)
+    public AccountInsertRoleHandler(IAccountInsertRoleRepository repositoryAccountInsertRole)
     {
-        _repositoryAccountAddRole = repositoryAccountAddRole;
+        _repositoryAccountInsertRole = repositoryAccountInsertRole;
     }
 
-    public ICommandResult Handle(AccountAddRoleCommand command)
+    public ICommandResult Handle(AccountInsertRoleCommand command)
     {
         #region 01. Valida a requisição.
         try
@@ -35,7 +35,7 @@ public class AccountAddRoleHandler : Notifiable<Notification>, IHandler<AccountA
         User? user;
         try
         {
-            user = _repositoryAccountAddRole.GetUserByEmailAsync(command.Email).Result;
+            user = _repositoryAccountInsertRole.GetUserByEmailAsync(command.Email).Result;
             if (user is null)
                 return new CommandResult(false, "Perfil não encontrado", command.Notifications);
         }
@@ -50,7 +50,7 @@ public class AccountAddRoleHandler : Notifiable<Notification>, IHandler<AccountA
         Role? role;
         try
         {
-            role = _repositoryAccountAddRole.GetRoleByTitleAsync(command.Role).Result;
+            role = _repositoryAccountInsertRole.GetRoleByTitleAsync(command.Role).Result;
             if (role is null)
                 return new CommandResult(false, "Role não encontrado", command.Notifications);
         }
@@ -74,7 +74,7 @@ public class AccountAddRoleHandler : Notifiable<Notification>, IHandler<AccountA
         #region 05. Perciste as alterações no banco.
         try
         {
-            _repositoryAccountAddRole.SaveAsync(user);
+            _repositoryAccountInsertRole.SaveAsync(user);
         }
         catch
         {

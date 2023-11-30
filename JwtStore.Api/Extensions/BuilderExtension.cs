@@ -41,28 +41,26 @@ public static class BuilderExtension
     }
     public static void AddJwtAuthentication(this WebApplicationBuilder builder)
     {
-        builder.Services
-            .AddAuthentication(x =>
+        var key = Encoding.ASCII.GetBytes(Configuration.Secrets.JwtPrivateKey);
+        builder.Services.AddAuthentication(x =>
+        {
+            x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+            x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+        }).AddJwtBearer(x =>
+        {
+            x.TokenValidationParameters = new TokenValidationParameters
             {
-                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-            }).AddJwtBearer(x =>
-            {
-                x.RequireHttpsMetadata = false;
-                x.SaveToken = true;
-                x.TokenValidationParameters = new TokenValidationParameters
-                {
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(Configuration.Secrets.JwtPrivateKey)),
-                    ValidateIssuer = false,
-                    ValidateAudience = false
-                };
-            });
-        builder.Services.AddAuthorization();
+                ValidateIssuerSigningKey = true,
+                IssuerSigningKey = new SymmetricSecurityKey(key),
+                ValidateIssuer = false,
+                ValidateAudience = false
+            };
+        });
     }
     public static void AddRepositories(this WebApplicationBuilder builder)
     {
-        builder.Services.AddTransient<IAccountCreateRepository, AccountCreateRepository>();
-        builder.Services.AddTransient<AccountCreateHandler, AccountCreateHandler>();
+        builder.Services.AddTransient<IAccountCreateUserRepository, AccountCreateUserRepository>();
+        builder.Services.AddTransient<AccountCreateUserHandler, AccountCreateUserHandler>();
         builder.Services.AddTransient<IAccountAuthenticateRepository, AccountAuthenticateRepository>();
         builder.Services.AddTransient<AccountAuthenticateHandler, AccountAuthenticateHandler>();
         builder.Services.AddTransient<ICategoryCreateRepository, CategoryCreateRepository>();
@@ -73,10 +71,10 @@ public static class BuilderExtension
         builder.Services.AddTransient<ProductCreateHandler, ProductCreateHandler>();
         builder.Services.AddTransient<IProductUpdateRepository, ProductUpdateRepository>();
         builder.Services.AddTransient<ProductUpdateHandler, ProductUpdateHandler>();
-        builder.Services.AddTransient<IAccountAddRoleRepository, AccountAddRoleRepository>();
-        builder.Services.AddTransient<AccountAddRoleHandler, AccountAddRoleHandler>();
-        builder.Services.AddTransient<IAccountRoleCreateRepository, AccountRoleCreateRepository>();
-        builder.Services.AddTransient<AccountRoleCreateHandler, AccountRoleCreateHandler>();
+        builder.Services.AddTransient<IAccountInsertRoleRepository, AccountInsertRoleRepository>();
+        builder.Services.AddTransient<AccountInsertRoleHandler, AccountInsertRoleHandler>();
+        builder.Services.AddTransient<IAccountCreateRoleRepository, AccountCreateRoleRepository>();
+        builder.Services.AddTransient<AccountCreateRoleHandler, AccountCreateRoleHandler>();
     }
     public static void AddServices(this WebApplicationBuilder builder)
     {
