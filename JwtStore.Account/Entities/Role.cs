@@ -14,5 +14,5 @@ public class Role : Entity
     }
 
     public string Title { get; private set; } = string.Empty;
-    public IList<User?> Users { get; private set; } = new List<User?>();
+    public List<User> Users { get; private set; } = new();
 }

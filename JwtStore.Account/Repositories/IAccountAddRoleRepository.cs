@@ -6,5 +6,5 @@ public interface IAccountAddRoleRepository
 {
     Task<User?> GetUserByEmailAsync(string email);
     Task<Role?> GetRoleByTitleAsync(string title);
-    void SaveAsync(User user);
+    Task SaveAsync(User user);
 }

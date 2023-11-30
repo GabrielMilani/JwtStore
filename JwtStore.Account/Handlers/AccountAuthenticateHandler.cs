@@ -3,7 +3,6 @@ using JwtStore.Account.Commands;
 using JwtStore.Account.Entities;
 using JwtStore.Account.Repositories;
 using JwtStore.Account.Services;
-using JwtStore.Shared;
 using JwtStore.Shared.Commands;
 using JwtStore.Shared.Handlers;
 using SecureIdentity.Password;
@@ -23,6 +22,7 @@ public class AccountAuthenticateHandler : Notifiable<Notification>, IHandler<Acc
 
     public ICommandResult Handle(AccountAuthenticateCommand command)
     {
+        #region 01. Valida a requisição
         try
         {
             command.Validate();
@@ -33,7 +33,9 @@ public class AccountAuthenticateHandler : Notifiable<Notification>, IHandler<Acc
         {
             return new CommandResult(false, "Ops, falha ao verificar requisição!", command.Notifications);
         }
+        #endregion
 
+        #region 02. Recupera perfil do usuário
         User? user;
         try
         {
@@ -45,6 +47,9 @@ public class AccountAuthenticateHandler : Notifiable<Notification>, IHandler<Acc
         {
             return new CommandResult(false, "Não foi possível recuperar seu perfil", command.Notifications);
         }
+        #endregion
+
+        #region 03. Verifica senha do usuário
         try
         {
             if (!PasswordHasher.Verify(user.Password.Hash, command.Password))
@@ -54,6 +59,9 @@ public class AccountAuthenticateHandler : Notifiable<Notification>, IHandler<Acc
         {
             return new CommandResult(false, "Não foi possível recuperar seu perfil", command.Notifications);
         }
+        #endregion
+
+        #region 04. Gera token de Autenticação
         string token;
         try
         {
@@ -63,6 +71,8 @@ public class AccountAuthenticateHandler : Notifiable<Notification>, IHandler<Acc
         {
             return new CommandResult(false, "Não foi possível gerar seu token de altentificação", command.Notifications);
         }
+        #endregion
+
         return new CommandResult(true, "Login efetuado com sucesso!", token, user);
     }
 

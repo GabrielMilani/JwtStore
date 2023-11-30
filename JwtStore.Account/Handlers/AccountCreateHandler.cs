@@ -20,6 +20,7 @@ public class AccountCreateHandler : Notifiable<Notification>, IHandler<AccountCr
 
     public ICommandResult Handle(AccountCreateCommand command)
     {
+        #region 01. Valida a requisição.
         try
         {
             command.Validate();
@@ -30,8 +31,9 @@ public class AccountCreateHandler : Notifiable<Notification>, IHandler<AccountCr
         {
             return new CommandResult(false, "Ops, falha ao verificar requisição!", command.Notifications);
         }
+        #endregion
 
-
+        #region 02. Recebe perfil do usuário.
         Email email;
         Password password;
         User user;
@@ -46,6 +48,9 @@ public class AccountCreateHandler : Notifiable<Notification>, IHandler<AccountCr
         {
             return new CommandResult(false, "Ops, falha ao cadastrar Usuário!", command.Notifications);
         }
+        #endregion
+
+        #region 03. Valida se email ja existe cadastrado. 
         try
         {
             var exists = _repositoryAccountCreate.AnyAsync(command.Email);
@@ -56,6 +61,9 @@ public class AccountCreateHandler : Notifiable<Notification>, IHandler<AccountCr
         {
             return new CommandResult(false, "Falha ao verificar E-mail cadastrado", command.Notifications);
         }
+        #endregion
+
+        #region 04. Persiste o perfil do usuário no banco.
         try
         {
             _repositoryAccountCreate.SaveAsync(user);
@@ -64,6 +72,8 @@ public class AccountCreateHandler : Notifiable<Notification>, IHandler<AccountCr
         {
             return new CommandResult(false, "Falha ao persistir dados", command.Notifications);
         }
+        #endregion
+
         return new CommandResult(true, "Conta criada com sucesso!", user);
 
     }

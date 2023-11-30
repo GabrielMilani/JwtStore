@@ -8,6 +8,8 @@ public class RoleMap : IEntityTypeConfiguration<Role>
 {
     public void Configure(EntityTypeBuilder<Role> builder)
     {
+        builder.ToTable("Role");
+
         builder.Property<Guid>("Id")
             .ValueGeneratedOnAdd()
             .HasColumnType("uniqueidentifier");

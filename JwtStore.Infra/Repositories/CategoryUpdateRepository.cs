@@ -17,9 +17,9 @@ public class CategoryUpdateRepository : ICategoryUpdateRepository
         return await _context.Categories.AsNoTracking().FirstOrDefaultAsync(x => x.Id == categoryId);
     }
 
-    public async Task SaveAsync(Category category)
+    public void SaveAsync(Category category)
     {
-        await _context.Categories.AddAsync(category);
-        await _context.SaveChangesAsync();
+        _context.Entry(category).State = EntityState.Modified;
+        _context.SaveChanges();
     }
 }

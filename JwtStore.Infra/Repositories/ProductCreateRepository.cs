@@ -1,6 +1,7 @@
 ﻿using JwtStore.Infra.Data;
 using JwtStore.Stock.Entities;
 using JwtStore.Stock.Repositories;
+using Microsoft.EntityFrameworkCore;
 
 namespace JwtStore.Infra.Repositories;
 
@@ -13,7 +14,7 @@ public class ProductCreateRepository : IProductCreateRepository
 
     public async Task SaveAsync(Product product)
     {
-        await _context.Products.AddAsync(product);
+        _context.Products.Entry(product).State = EntityState.Modified;
         await _context.SaveChangesAsync();
     }
 }

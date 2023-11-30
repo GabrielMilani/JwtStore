@@ -11,14 +11,14 @@ public class AccountAddRoleRepository : IAccountAddRoleRepository
     public AccountAddRoleRepository(AppDbContext context)
         => _context = context;
     public async Task<User?> GetUserByEmailAsync(string email)
-        => await _context.Users.AsNoTracking().FirstOrDefaultAsync(x => x.Email.Address == email);
+        => await _context.Users.FirstOrDefaultAsync(x => x.Email.Address == email);
 
     public async Task<Role?> GetRoleByTitleAsync(string title)
-        => await _context.Roles.AsNoTracking().FirstOrDefaultAsync(x => x.Title == title);
+        => await _context.Roles.FirstOrDefaultAsync(x => x.Title == title);
 
-    public void SaveAsync(User user)
+    public async Task SaveAsync(User user)
     {
         _context.Entry(user).State = EntityState.Modified;
-        _context.SaveChanges();
+        await _context.SaveChangesAsync();
     }
 }

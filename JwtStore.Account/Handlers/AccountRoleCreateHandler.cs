@@ -18,6 +18,7 @@ public class AccountRoleCreateHandler : Notifiable<Notification>, IHandler<Accou
 
     public ICommandResult Handle(AccountRoleCreateCommand command)
     {
+        #region 01. Valida a requisição.
         try
         {
             command.Validate();
@@ -28,7 +29,9 @@ public class AccountRoleCreateHandler : Notifiable<Notification>, IHandler<Accou
         {
             return new CommandResult(false, "Ops, falha ao verificar requisição!", command.Notifications);
         }
+        #endregion
 
+        #region 02. Recebe dados role.
         Role role;
         try
         {
@@ -38,6 +41,9 @@ public class AccountRoleCreateHandler : Notifiable<Notification>, IHandler<Accou
         {
             return new CommandResult(false, "Ops, falha ao verificar requisição!", command.Notifications);
         }
+        #endregion
+
+        #region 03. Valida se titulo do role ja cadastrado.
         try
         {
             var exists = _repositoryAccountRoleCreate.AnyAsync(command.Title);
@@ -48,6 +54,9 @@ public class AccountRoleCreateHandler : Notifiable<Notification>, IHandler<Accou
         {
             return new CommandResult(false, "Falha ao verificar role cadastrado", command.Notifications);
         }
+        #endregion
+
+        #region 04. Persiste role no banco.
         try
         {
             _repositoryAccountRoleCreate.SaveAsync(role);
@@ -56,6 +65,8 @@ public class AccountRoleCreateHandler : Notifiable<Notification>, IHandler<Accou
         {
             return new CommandResult(false, "Falha ao persistir dados", command.Notifications);
         }
+        #endregion 
+
         return new CommandResult(true, "Conta criada com sucesso!", role);
     }
 }
