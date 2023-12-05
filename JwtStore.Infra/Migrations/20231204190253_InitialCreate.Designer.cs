@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace JwtStore.Infra.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20231130160911_InitialCreate")]
+    [Migration("20231204190253_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -27,9 +27,12 @@ namespace JwtStore.Infra.Migrations
 
             modelBuilder.Entity("JwtStore.Account.Entities.Role", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("int")
+                        .HasColumnName("id");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Title")
                         .IsRequired()
@@ -44,9 +47,12 @@ namespace JwtStore.Infra.Migrations
 
             modelBuilder.Entity("JwtStore.Account.Entities.User", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("int")
+                        .HasColumnName("id");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -61,9 +67,12 @@ namespace JwtStore.Infra.Migrations
 
             modelBuilder.Entity("JwtStore.Stock.Entities.Category", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("int")
+                        .HasColumnName("id");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Title")
                         .IsRequired()
@@ -78,12 +87,15 @@ namespace JwtStore.Infra.Migrations
 
             modelBuilder.Entity("JwtStore.Stock.Entities.Product", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("int")
+                        .HasColumnName("id");
 
-                    b.Property<Guid>("CategoryId")
-                        .HasColumnType("uniqueidentifier");
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("CategoryId")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("CreateDate")
                         .HasMaxLength(60)
@@ -125,11 +137,11 @@ namespace JwtStore.Infra.Migrations
 
             modelBuilder.Entity("UserRole", b =>
                 {
-                    b.Property<Guid>("RoleId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<int>("RoleId")
+                        .HasColumnType("int");
 
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
 
                     b.HasKey("RoleId", "UserId");
 
@@ -142,8 +154,8 @@ namespace JwtStore.Infra.Migrations
                 {
                     b.OwnsOne("JwtStore.Account.ValueObjects.Email", "Email", b1 =>
                         {
-                            b1.Property<Guid>("UserId")
-                                .HasColumnType("uniqueidentifier");
+                            b1.Property<int>("UserId")
+                                .HasColumnType("int");
 
                             b1.Property<string>("Address")
                                 .IsRequired()
@@ -166,8 +178,8 @@ namespace JwtStore.Infra.Migrations
 
                     b.OwnsOne("JwtStore.Account.ValueObjects.Password", "Password", b1 =>
                         {
-                            b1.Property<Guid>("UserId")
-                                .HasColumnType("uniqueidentifier");
+                            b1.Property<int>("UserId")
+                                .HasColumnType("int");
 
                             b1.Property<string>("Hash")
                                 .IsRequired()

@@ -1,5 +1,6 @@
 ﻿using Flunt.Notifications;
 using JwtStore.Account.Commands;
+using JwtStore.Account.Commands.Results;
 using JwtStore.Account.Entities;
 using JwtStore.Account.Repositories;
 using JwtStore.Account.Services;
@@ -73,7 +74,7 @@ public class AccountAuthenticateHandler : Notifiable<Notification>, IHandler<Acc
         }
         #endregion
 
-        return new CommandResult(true, "Login efetuado com sucesso!", token, user);
+        return new AccountAuthenticateCommandResult(true, "Login success!", user.Name, user.Email, token);
     }
 
 }

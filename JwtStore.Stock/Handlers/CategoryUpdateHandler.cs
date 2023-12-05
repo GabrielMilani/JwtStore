@@ -2,6 +2,8 @@
 using JwtStore.Shared.Commands;
 using JwtStore.Shared.Handlers;
 using JwtStore.Stock.Commands;
+using JwtStore.Stock.Commands.Results;
+using JwtStore.Stock.Commands.Results.Response;
 using JwtStore.Stock.Entities;
 using JwtStore.Stock.Repositories;
 
@@ -56,6 +58,10 @@ public class CategoryUpdateHandler : Notifiable<Notification>, IHandler<Category
         }
         #endregion
 
-        return new CommandResult(true, "Categoria Alterada com sucesso!", category);
+        var categoryResponse = new CategoryResponse(category.Id, category.Title);
+        var listCategoryResponse = new List<CategoryResponse>();
+        listCategoryResponse.Add(categoryResponse);
+
+        return new CategoryCommandResult(true, "Category Updated success!", listCategoryResponse);
     }
 }

@@ -6,7 +6,7 @@ namespace JwtStore.Stock.Commands;
 public class ProductCreateCommand : Notifiable<Notification>, ICommand
 {
     public ProductCreateCommand(string title, string description, decimal price, decimal quantityOnHand,
-                                DateTime createDate, DateTime lastUpdateDate, Guid categoryId)
+                                DateTime createDate, DateTime lastUpdateDate, int categoryId)
     {
         Title = title;
         Description = description;
@@ -23,7 +23,7 @@ public class ProductCreateCommand : Notifiable<Notification>, ICommand
     public decimal QuantityOnHand { get; set; }
     public DateTime CreateDate { get; set; }
     public DateTime LastUpdateDate { get; set; }
-    public Guid CategoryId { get; set; }
+    public int CategoryId { get; set; }
 
     public void Validate() { }
 }

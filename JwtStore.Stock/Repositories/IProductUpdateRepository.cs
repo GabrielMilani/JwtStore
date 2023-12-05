@@ -4,6 +4,6 @@ namespace JwtStore.Stock.Repositories;
 
 public interface IProductUpdateRepository
 {
-    Task<Product?> GetProductByIdAsync(Guid productId);
+    Task<Product?> GetProductByIdAsync(int productId);
     Task SaveAsync(Product product);
 }

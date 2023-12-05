@@ -1,5 +1,6 @@
 ﻿using JwtStore.Infra.Data;
 using JwtStore.Stock.Entities;
+using JwtStore.Stock.Queries;
 using JwtStore.Stock.Repositories;
 using Microsoft.EntityFrameworkCore;
 
@@ -12,13 +13,12 @@ public class ProductUpdateRepository : IProductUpdateRepository
     public ProductUpdateRepository(AppDbContext context)
         => _context = context;
 
-    public async Task<Product?> GetProductByIdAsync(Guid productId)
-        => await _context.Products.AsNoTracking()
-            .FirstOrDefaultAsync(x => x.Id == productId);
+    public async Task<Product?> GetProductByIdAsync(int productId)
+        => await _context.Products.FirstOrDefaultAsync(ProductQueries.GetById(productId));
 
     public async Task SaveAsync(Product product)
     {
-        await _context.Products.AddAsync(product);
+        _context.Products.Entry(product).State = EntityState.Modified;
         await _context.SaveChangesAsync();
     }
 }

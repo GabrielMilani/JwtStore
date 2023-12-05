@@ -9,7 +9,7 @@ public class Product : Entity
     }
 
     public Product(string title, string description, decimal price, decimal quantityOnHand,
-                   DateTime createDate, DateTime lastUpdateDate, Guid categoryId)
+                   DateTime createDate, DateTime lastUpdateDate, int categoryId)
     {
         Title = title;
         Description = description;
@@ -26,7 +26,7 @@ public class Product : Entity
     public decimal QuantityOnHand { get; private set; }
     public DateTime CreateDate { get; private set; }
     public DateTime LastUpdateDate { get; private set; }
-    public Guid CategoryId { get; private set; }
+    public int CategoryId { get; private set; }
     public Category Category { get; private set; } = null!;
 
     public void UpdateTitleProduct(string newTitle)
@@ -45,7 +45,7 @@ public class Product : Entity
     {
         QuantityOnHand = newQuantityOnHand;
     }
-    public void UpdateCategoryProduct(Guid newCategoryId)
+    public void UpdateCategoryProduct(int newCategoryId)
     {
         CategoryId = newCategoryId;
     }

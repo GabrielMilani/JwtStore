@@ -5,8 +5,8 @@ namespace JwtStore.Stock.Commands;
 
 public class ProductUpdateCommand : Notifiable<Notification>, ICommand
 {
-    public ProductUpdateCommand(Guid id, string title, string description, decimal price, decimal quantityOnHand,
-                                DateTime lastUpdateDate, Guid categoryId)
+    public ProductUpdateCommand(int id, string title, string description, decimal price, decimal quantityOnHand,
+                                DateTime lastUpdateDate, int categoryId)
     {
         Id = id;
         Title = title;
@@ -17,13 +17,13 @@ public class ProductUpdateCommand : Notifiable<Notification>, ICommand
         CategoryId = categoryId;
     }
 
-    public Guid Id { get; set; }
+    public int Id { get; set; }
     public string Title { get; set; }
     public string Description { get; set; }
     public decimal Price { get; set; }
     public decimal QuantityOnHand { get; set; }
     public DateTime LastUpdateDate { get; set; }
-    public Guid CategoryId { get; set; }
+    public int CategoryId { get; set; }
 
     public void Validate() { }
 }

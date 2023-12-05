@@ -2,6 +2,8 @@
 using JwtStore.Shared.Commands;
 using JwtStore.Shared.Handlers;
 using JwtStore.Stock.Commands;
+using JwtStore.Stock.Commands.Results;
+using JwtStore.Stock.Commands.Results.Response;
 using JwtStore.Stock.Entities;
 using JwtStore.Stock.Repositories;
 
@@ -55,6 +57,11 @@ public class ProductCreateHandler : Notifiable<Notification>, IHandler<ProductCr
         }
         #endregion
 
-        return new CommandResult(true, "Produto cadastrado com sucesso!", product);
+        var productResponse = new ProductResponse(product.Id, product.Title, product.Description, product.Price,
+                                                  product.QuantityOnHand, product.CategoryId);
+        var listProductObject = new List<ProductResponse>();
+        listProductObject.Add(productResponse);
+
+        return new ProductCommandResult(true, "Created Product success!", listProductObject);
     }
 }

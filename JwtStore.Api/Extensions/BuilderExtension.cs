@@ -11,7 +11,6 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
-using System.Text.Json.Serialization;
 
 namespace JwtStore.Api.Extensions;
 
@@ -19,8 +18,7 @@ public static class BuilderExtension
 {
     public static void AddControllers(this WebApplicationBuilder builder)
     {
-        builder.Services.AddControllers().AddJsonOptions(x =>
-            x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve);
+        builder.Services.AddControllers();
     }
     public static void AddConfiguration(this WebApplicationBuilder builder)
     {
@@ -75,6 +73,8 @@ public static class BuilderExtension
         builder.Services.AddTransient<AccountInsertRoleHandler, AccountInsertRoleHandler>();
         builder.Services.AddTransient<IAccountCreateRoleRepository, AccountCreateRoleRepository>();
         builder.Services.AddTransient<AccountCreateRoleHandler, AccountCreateRoleHandler>();
+        builder.Services.AddTransient<ICategorySelectRepository, CategorySelectRepository>();
+        builder.Services.AddTransient<IProductSelectRepository, ProductSelectRepository>();
     }
     public static void AddServices(this WebApplicationBuilder builder)
     {

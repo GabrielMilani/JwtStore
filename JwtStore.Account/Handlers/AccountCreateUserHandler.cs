@@ -1,5 +1,6 @@
 ﻿using Flunt.Notifications;
 using JwtStore.Account.Commands;
+using JwtStore.Account.Commands.Results;
 using JwtStore.Account.Entities;
 using JwtStore.Account.Repositories;
 using JwtStore.Account.ValueObjects;
@@ -74,7 +75,7 @@ public class AccountCreateUserHandler : Notifiable<Notification>, IHandler<Accou
         }
         #endregion
 
-        return new CommandResult(true, "Conta criada com sucesso!", user);
+        return new AccountCreateCommandResult(true, "Account created success!", user.Name, user.Email, user.Password.Hash);
 
     }
 }

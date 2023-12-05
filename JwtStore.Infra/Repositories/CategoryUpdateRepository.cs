@@ -1,5 +1,6 @@
 ﻿using JwtStore.Infra.Data;
 using JwtStore.Stock.Entities;
+using JwtStore.Stock.Queries;
 using JwtStore.Stock.Repositories;
 using Microsoft.EntityFrameworkCore;
 
@@ -12,12 +13,8 @@ public class CategoryUpdateRepository : ICategoryUpdateRepository
     public CategoryUpdateRepository(AppDbContext context)
         => _context = context;
 
-    public async Task<Category?> GetCategoryByIdAsync(Guid categoryId)
-    {
-        return await _context.Categories
-            .AsNoTracking()
-            .FirstOrDefaultAsync(x => x.Id == categoryId);
-    }
+    public async Task<Category?> GetCategoryByIdAsync(int categoryId)
+        => await _context.Categories.FirstOrDefaultAsync(CategoryQueries.GetById(categoryId));
 
     public async Task SaveAsync(Category category)
     {

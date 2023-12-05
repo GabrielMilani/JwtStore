@@ -1,13 +1,10 @@
 ﻿namespace JwtStore.Shared.Entities;
 
-public abstract class Entity : IEquatable<Guid>
+public abstract class Entity : IEquatable<int>
 {
-    protected Entity()
-        => Id = Guid.NewGuid();
+    public int Id { get; private set; }
 
-    public Guid Id { get; }
-
-    public bool Equals(Guid id)
+    public bool Equals(int id)
         => Id == id;
 
     public override int GetHashCode()

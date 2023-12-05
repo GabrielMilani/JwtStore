@@ -10,11 +10,10 @@ public class CategoryMap : IEntityTypeConfiguration<Category>
     {
         builder.ToTable("Category");
 
-        builder.Property<Guid>("Id")
-            .ValueGeneratedOnAdd()
-            .HasColumnType("uniqueidentifier");
-
-        builder.HasKey("Id");
+        builder.HasKey(x => x.Id);
+        builder.Property(x => x.Id)
+            .HasColumnName("id")
+            .ValueGeneratedOnAdd();
 
         builder.Property(x => x.Title)
             .HasColumnName("Title")
