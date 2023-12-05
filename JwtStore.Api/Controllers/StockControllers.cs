@@ -57,10 +57,10 @@ public class StockControllers : ControllerBase
     {
         var category = categorySelect.GetById(id).Result;
         if (category is null)
-            return new CommandResult(false, "falha ao buscar por cartegory");
+            return new CommandResult(false, "Category searsh failed");
         var listCategoryResponse = new List<CategoryResponse>();
         listCategoryResponse.Add(new CategoryResponse(category.Id, category.Title));
-        return new CategoryCommandResult(true, "Categoria onde Id e igual a ", listCategoryResponse);
+        return new CategoryCommandResult(true, "Category", listCategoryResponse);
     }
     #endregion
 
@@ -73,7 +73,6 @@ public class StockControllers : ControllerBase
         return (ProductCommandResult)handler.Handle(command);
     }
     #endregion
-
 
     #region Product Update
     [Authorize(Roles = "ADMIN")]

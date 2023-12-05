@@ -12,6 +12,7 @@ public class AccountInsertRoleRepository : IAccountInsertRoleRepository
         => _context = context;
     public async Task<User?> GetUserByEmailAsync(string email)
         => await _context.Users
+            .Include(x => x.Roles)
             .FirstOrDefaultAsync(x => x.Email.Address == email);
 
     public async Task<Role?> GetRoleByTitleAsync(string title)

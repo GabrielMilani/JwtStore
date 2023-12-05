@@ -13,7 +13,7 @@ public class AccountControllers : ControllerBase
     public ICommandResult Post([FromBody] AccountCreateUserCommand userCommand,
                                [FromServices] AccountCreateUserHandler userHandler)
     {
-        return (AccountCreateCommandResult)userHandler.Handle(userCommand);
+        return (AccountUserCommandResult)userHandler.Handle(userCommand);
     }
 
     [HttpGet("v1/accounts")]
@@ -22,17 +22,11 @@ public class AccountControllers : ControllerBase
     {
         return (AccountAuthenticateCommandResult)handler.Handle(command);
     }
-
-    [HttpPost("v1/accounts/roles")]
-    public ICommandResult Get([FromBody] AccountCreateRoleCommand command,
-                              [FromServices] AccountCreateRoleHandler handler)
-    {
-        return (CommandResult)handler.Handle(command);
-    }
     [HttpPut("v1/accounts/roles")]
     public ICommandResult Get([FromBody] AccountInsertRoleCommand command,
-                              [FromServices] AccountInsertRoleHandler handler)
+        [FromServices] AccountInsertRoleHandler handler)
     {
-        return (CommandResult)handler.Handle(command);
+        return (AccountRoleCommandResult)handler.Handle(command);
     }
+
 }

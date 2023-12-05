@@ -1,5 +1,7 @@
 ﻿using Flunt.Notifications;
 using JwtStore.Account.Commands;
+using JwtStore.Account.Commands.Results;
+using JwtStore.Account.Commands.Results.Response;
 using JwtStore.Account.Entities;
 using JwtStore.Account.Repositories;
 using JwtStore.Shared.Commands;
@@ -82,6 +84,11 @@ public class AccountInsertRoleHandler : Notifiable<Notification>, IHandler<Accou
         }
         #endregion
 
-        return new CommandResult(true, "Role adicionado com sucesso!", user);
+        var listRoleResponse = new List<RoleResponse>();
+        foreach (var roleResponse in user.Roles)
+        {
+            listRoleResponse.Add(new RoleResponse(role.Id, role.Title));
+        }
+        return new AccountRoleCommandResult(true, "Roles add success!", listRoleResponse);
     }
 }

@@ -1,5 +1,7 @@
 ﻿using Flunt.Notifications;
 using JwtStore.Account.Commands;
+using JwtStore.Account.Commands.Results;
+using JwtStore.Account.Commands.Results.Response;
 using JwtStore.Account.Entities;
 using JwtStore.Account.Repositories;
 using JwtStore.Shared.Commands;
@@ -67,6 +69,10 @@ public class AccountCreateRoleHandler : Notifiable<Notification>, IHandler<Accou
         }
         #endregion 
 
-        return new CommandResult(true, "Conta criada com sucesso!", role);
+        var roleResponse = new RoleResponse(role.Id, role.Title);
+        var listRoleObject = new List<RoleResponse>();
+        listRoleObject.Add(roleResponse);
+
+        return new AccountRoleCommandResult(true, "Conta criada com sucesso!", listRoleObject);
     }
 }

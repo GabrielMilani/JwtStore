@@ -75,7 +75,7 @@ public class AccountCreateUserHandler : Notifiable<Notification>, IHandler<Accou
         }
         #endregion
 
-        return new AccountCreateCommandResult(true, "Account created success!", user.Name, user.Email, user.Password.Hash);
+        return new AccountUserCommandResult(true, "Account created success!", user.Name, user.Email, user.Password.Hash);
 
     }
 }
