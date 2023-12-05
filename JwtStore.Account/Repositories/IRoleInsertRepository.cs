@@ -2,7 +2,7 @@
 
 namespace JwtStore.Account.Repositories;
 
-public interface IAccountInsertRoleRepository
+public interface IRoleInsertRepository
 {
     Task<User?> GetUserByEmailAsync(string email);
     Task<Role?> GetRoleByTitleAsync(string title);

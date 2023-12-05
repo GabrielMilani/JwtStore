@@ -2,7 +2,7 @@
 
 namespace JwtStore.Account.Repositories;
 
-public interface IAccountSelectRoleRepository
+public interface ISelectRoleRepository
 {
     Task<Role?> GetById(int roleId);
 }

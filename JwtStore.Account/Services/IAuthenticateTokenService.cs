@@ -2,7 +2,7 @@
 
 namespace JwtStore.Account.Services;
 
-public interface IAccountAuthenticateTokenService
+public interface IAuthenticateTokenService
 {
     string GenerateToken(User user);
 }

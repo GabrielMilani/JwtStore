@@ -2,9 +2,9 @@
 
 namespace JwtStore.Account.Commands.Results;
 
-public class AccountUserCommandResult : ICommandResult
+public class UserCommandResult : ICommandResult
 {
-    public AccountUserCommandResult(bool? success, string? message, string? name, string? email, string? password)
+    public UserCommandResult(bool? success, string? message, string? name, string? email, string? password)
     {
         Success = success;
         Message = message;

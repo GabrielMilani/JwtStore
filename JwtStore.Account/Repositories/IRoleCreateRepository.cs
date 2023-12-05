@@ -2,7 +2,7 @@
 
 namespace JwtStore.Account.Repositories;
 
-public interface IAccountCreateRoleRepository
+public interface IRoleCreateRepository
 {
     Task<bool> AnyAsync(string title);
     Task SaveAsync(Role role);

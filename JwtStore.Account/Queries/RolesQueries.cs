@@ -3,7 +3,7 @@ using System.Linq.Expressions;
 
 namespace JwtStore.Account.Queries;
 
-public static class AccountRolesQueries
+public static class RolesQueries
 {
     public static Expression<Func<Role, bool>> GetById(int roleId)
     {

@@ -10,16 +10,16 @@ using SecureIdentity.Password;
 
 namespace JwtStore.Account.Handlers;
 
-public class AccountCreateUserHandler : Notifiable<Notification>, IHandler<AccountCreateUserCommand>
+public class UserCreateHandler : Notifiable<Notification>, IHandler<UserCreateCommand>
 {
-    private readonly IAccountCreateUserRepository _userRepositoryAccountCreateUser;
+    private readonly IUserCreateRepository _userRepositoryAccountCreateUser;
 
-    public AccountCreateUserHandler(IAccountCreateUserRepository userRepositoryAccountCreateUser)
+    public UserCreateHandler(IUserCreateRepository userRepositoryAccountCreateUser)
     {
         _userRepositoryAccountCreateUser = userRepositoryAccountCreateUser;
     }
 
-    public ICommandResult Handle(AccountCreateUserCommand command)
+    public ICommandResult Handle(UserCreateCommand command)
     {
         #region 01. Valida a requisição.
         try
@@ -75,7 +75,7 @@ public class AccountCreateUserHandler : Notifiable<Notification>, IHandler<Accou
         }
         #endregion
 
-        return new AccountUserCommandResult(true, "Account created success!", user.Name, user.Email, user.Password.Hash);
+        return new UserCommandResult(true, "Account created success!", user.Name, user.Email, user.Password.Hash);
 
     }
 }

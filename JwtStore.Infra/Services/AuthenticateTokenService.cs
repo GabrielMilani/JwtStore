@@ -8,7 +8,7 @@ using System.Text;
 
 namespace JwtStore.Infra.Services;
 
-public class AccountAuthenticateTokenService : IAccountAuthenticateTokenService
+public class AuthenticateTokenService : IAuthenticateTokenService
 {
     public string GenerateToken(User user)
     {

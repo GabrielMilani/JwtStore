@@ -10,18 +10,18 @@ using SecureIdentity.Password;
 
 namespace JwtStore.Account.Handlers;
 
-public class AccountAuthenticateHandler : Notifiable<Notification>, IHandler<AccountAuthenticateCommand>
+public class AuthenticateHandler : Notifiable<Notification>, IHandler<AuthenticateCommand>
 {
-    private readonly IAccountAuthenticateRepository _repositoryAccountAuthenticate;
-    private readonly IAccountAuthenticateTokenService _tokenServiceAccountAuthenticate;
-    public AccountAuthenticateHandler(IAccountAuthenticateRepository repositoryAccountAuthenticate,
-                                      IAccountAuthenticateTokenService accountAuthenticateTokenService)
+    private readonly IAuthenticateRepository _repositoryAccountAuthenticate;
+    private readonly IAuthenticateTokenService _tokenServiceAccountAuthenticate;
+    public AuthenticateHandler(IAuthenticateRepository repositoryAccountAuthenticate,
+                                      IAuthenticateTokenService accountAuthenticateTokenService)
     {
         _repositoryAccountAuthenticate = repositoryAccountAuthenticate;
         _tokenServiceAccountAuthenticate = accountAuthenticateTokenService;
     }
 
-    public ICommandResult Handle(AccountAuthenticateCommand command)
+    public ICommandResult Handle(AuthenticateCommand command)
     {
         #region 01. Valida a requisição
         try
@@ -74,7 +74,7 @@ public class AccountAuthenticateHandler : Notifiable<Notification>, IHandler<Acc
         }
         #endregion
 
-        return new AccountAuthenticateCommandResult(true, "Login success!", user.Name, user.Email, token);
+        return new AuthenticateCommandResult(true, "Login success!", user.Name, user.Email, token);
     }
 
 }

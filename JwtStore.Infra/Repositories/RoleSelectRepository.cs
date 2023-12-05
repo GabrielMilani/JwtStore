@@ -6,15 +6,15 @@ using Microsoft.EntityFrameworkCore;
 
 namespace JwtStore.Infra.Repositories;
 
-public class AccountSelectRoleRepository : IAccountSelectRoleRepository
+public class RoleSelectRepository : ISelectRoleRepository
 {
     private readonly AppDbContext _context;
 
-    public AccountSelectRoleRepository(AppDbContext context)
+    public RoleSelectRepository(AppDbContext context)
       => _context = context;
 
     public async Task<Role?> GetById(int roleId)
     {
-        return await _context.Roles.FirstOrDefaultAsync(AccountRolesQueries.GetById(roleId));
+        return await _context.Roles.FirstOrDefaultAsync(RolesQueries.GetById(roleId));
     }
 }

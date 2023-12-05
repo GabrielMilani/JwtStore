@@ -12,12 +12,17 @@ namespace JwtStore.Api.Controllers;
 
 public class RoleControllers : ControllerBase
 {
+
+    #region Create role
     [HttpPost("v1/roles")]
-    public ICommandResult Post([FromBody] AccountCreateRoleCommand command,
-                               [FromServices] AccountCreateRoleHandler handler)
+    public ICommandResult Post([FromBody] RoleCreateCommand command,
+                               [FromServices] RoleCreateHandler handler)
     {
-        return (AccountRoleCommandResult)handler.Handle(command);
+        return (RoleCommandResult)handler.Handle(command);
     }
+    #endregion
+
+    #region Select all roles
 
     [HttpGet("v1/roles")]
     public ICommandResult Get([FromServices] AppDbContext context)
@@ -28,18 +33,25 @@ public class RoleControllers : ControllerBase
         {
             listRoleResponse.Add(new RoleResponse(role.Id, role.Title));
         }
-        return new AccountRoleCommandResult(true, "Role List", listRoleResponse);
+        return new RoleCommandResult(true, "Role List", listRoleResponse);
     }
+
+    #endregion
+
+    #region Select role by Id
+
     [HttpGet("v1/roles/{id:int}")]
     public ICommandResult GetById([FromRoute] int id,
-                                  [FromServices] IAccountSelectRoleRepository roleSelect)
+                                  [FromServices] ISelectRoleRepository roleSelect)
     {
         var role = roleSelect.GetById(id).Result;
         if (role is null)
             return new CommandResult(false, "Role search failed");
         var listRoleResponse = new List<RoleResponse>();
         listRoleResponse.Add(new RoleResponse(role.Id, role.Title));
-        return new AccountRoleCommandResult(true, "Role", listRoleResponse);
+        return new RoleCommandResult(true, "Role", listRoleResponse);
     }
+
+    #endregion
 
 }

@@ -4,9 +4,9 @@ using JwtStore.Shared.Commands;
 
 namespace JwtStore.Account.Commands;
 
-public class AccountCreateRoleCommand : Notifiable<Notification>, ICommand
+public class RoleCreateCommand : Notifiable<Notification>, ICommand
 {
-    public AccountCreateRoleCommand(string title)
+    public RoleCreateCommand(string title)
     {
         Title = title;
     }

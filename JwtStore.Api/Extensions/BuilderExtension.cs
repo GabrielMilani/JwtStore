@@ -57,10 +57,10 @@ public static class BuilderExtension
     }
     public static void AddRepositories(this WebApplicationBuilder builder)
     {
-        builder.Services.AddTransient<IAccountCreateUserRepository, AccountCreateUserRepository>();
-        builder.Services.AddTransient<AccountCreateUserHandler, AccountCreateUserHandler>();
-        builder.Services.AddTransient<IAccountAuthenticateRepository, AccountAuthenticateRepository>();
-        builder.Services.AddTransient<AccountAuthenticateHandler, AccountAuthenticateHandler>();
+        builder.Services.AddTransient<IUserCreateRepository, UserCreateRepository>();
+        builder.Services.AddTransient<UserCreateHandler, UserCreateHandler>();
+        builder.Services.AddTransient<IAuthenticateRepository, AuthenticateRepository>();
+        builder.Services.AddTransient<AuthenticateHandler, AuthenticateHandler>();
         builder.Services.AddTransient<ICategoryCreateRepository, CategoryCreateRepository>();
         builder.Services.AddTransient<CategoryCreateHandler, CategoryCreateHandler>();
         builder.Services.AddTransient<ICategoryUpdateRepository, CategoryUpdateRepository>();
@@ -69,16 +69,30 @@ public static class BuilderExtension
         builder.Services.AddTransient<ProductCreateHandler, ProductCreateHandler>();
         builder.Services.AddTransient<IProductUpdateRepository, ProductUpdateRepository>();
         builder.Services.AddTransient<ProductUpdateHandler, ProductUpdateHandler>();
-        builder.Services.AddTransient<IAccountInsertRoleRepository, AccountInsertRoleRepository>();
-        builder.Services.AddTransient<AccountInsertRoleHandler, AccountInsertRoleHandler>();
-        builder.Services.AddTransient<IAccountCreateRoleRepository, AccountCreateRoleRepository>();
-        builder.Services.AddTransient<AccountCreateRoleHandler, AccountCreateRoleHandler>();
+        builder.Services.AddTransient<IRoleInsertRepository, RoleInsertRepository>();
+        builder.Services.AddTransient<RoleInsertHandler, RoleInsertHandler>();
+        builder.Services.AddTransient<IRoleCreateRepository, RoleCreateRepository>();
+        builder.Services.AddTransient<RoleCreateHandler, RoleCreateHandler>();
         builder.Services.AddTransient<ICategorySelectRepository, CategorySelectRepository>();
         builder.Services.AddTransient<IProductSelectRepository, ProductSelectRepository>();
-        builder.Services.AddTransient<IAccountSelectRoleRepository, AccountSelectRoleRepository>();
+        builder.Services.AddTransient<ISelectRoleRepository, RoleSelectRepository>();
     }
     public static void AddServices(this WebApplicationBuilder builder)
     {
-        builder.Services.AddTransient<IAccountAuthenticateTokenService, AccountAuthenticateTokenService>();
+        builder.Services.AddTransient<IAuthenticateTokenService, AuthenticateTokenService>();
+    }
+    public static void AddSwagger(this WebApplicationBuilder builder)
+    {
+        builder.Services.AddEndpointsApiExplorer();
+        builder.Services.AddSwaggerGen();
+    }
+
+    public static void UseAppSwagger(this WebApplication app)
+    {
+        if (app.Environment.IsDevelopment())
+        {
+            app.UseSwagger();
+            app.UseSwaggerUI();
+        }
     }
 }

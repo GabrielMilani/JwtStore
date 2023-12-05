@@ -2,11 +2,11 @@
 
 namespace JwtStore.Account.Commands.Results;
 
-public class AccountAuthenticateCommandResult : ICommandResult
+public class AuthenticateCommandResult : ICommandResult
 {
-    public AccountAuthenticateCommandResult() { }
+    public AuthenticateCommandResult() { }
 
-    public AccountAuthenticateCommandResult(bool? success, string? message, string? name, string? email, string? token)
+    public AuthenticateCommandResult(bool? success, string? message, string? name, string? email, string? token)
     {
         Success = success;
         Message = message;

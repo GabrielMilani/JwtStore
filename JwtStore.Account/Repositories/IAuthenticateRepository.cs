@@ -2,7 +2,7 @@
 
 namespace JwtStore.Account.Repositories;
 
-public interface IAccountAuthenticateRepository
+public interface IAuthenticateRepository
 {
     Task<User?> GetUserByEmailAsync(string email);
 }

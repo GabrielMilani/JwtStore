@@ -5,11 +5,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace JwtStore.Infra.Repositories;
 
-public class AccountCreateRoleRepository : IAccountCreateRoleRepository
+public class RoleCreateRepository : IRoleCreateRepository
 {
     private readonly AppDbContext _context;
 
-    public AccountCreateRoleRepository(AppDbContext context)
+    public RoleCreateRepository(AppDbContext context)
         => _context = context;
 
     public async Task<bool> AnyAsync(string title)

@@ -5,11 +5,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace JwtStore.Infra.Repositories;
 
-public class AccountCreateUserRepository : IAccountCreateUserRepository
+public class UserCreateRepository : IUserCreateRepository
 {
     private readonly AppDbContext _context;
 
-    public AccountCreateUserRepository(AppDbContext context)
+    public UserCreateRepository(AppDbContext context)
         => _context = context;
     public async Task<bool> AnyAsync(string email)
         => await _context.Users

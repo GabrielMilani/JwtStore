@@ -3,9 +3,9 @@ using JwtStore.Shared.Commands;
 
 namespace JwtStore.Account.Commands.Results;
 
-public class AccountRoleCommandResult : ICommandResult
+public class RoleCommandResult : ICommandResult
 {
-    public AccountRoleCommandResult(bool? success, string? message, List<RoleResponse> roles)
+    public RoleCommandResult(bool? success, string? message, List<RoleResponse> roles)
     {
         Success = success;
         Message = message;

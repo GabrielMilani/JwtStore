@@ -5,10 +5,10 @@ using Microsoft.EntityFrameworkCore;
 
 namespace JwtStore.Infra.Repositories;
 
-public class AccountInsertRoleRepository : IAccountInsertRoleRepository
+public class RoleInsertRepository : IRoleInsertRepository
 {
     private readonly AppDbContext _context;
-    public AccountInsertRoleRepository(AppDbContext context)
+    public RoleInsertRepository(AppDbContext context)
         => _context = context;
     public async Task<User?> GetUserByEmailAsync(string email)
         => await _context.Users

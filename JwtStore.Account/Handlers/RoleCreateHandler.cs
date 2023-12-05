@@ -9,16 +9,16 @@ using JwtStore.Shared.Handlers;
 
 namespace JwtStore.Account.Handlers;
 
-public class AccountCreateRoleHandler : Notifiable<Notification>, IHandler<AccountCreateRoleCommand>
+public class RoleCreateHandler : Notifiable<Notification>, IHandler<RoleCreateCommand>
 {
-    private readonly IAccountCreateRoleRepository _repositoryAccountCreateRole;
+    private readonly IRoleCreateRepository _repositoryAccountCreateRole;
 
-    public AccountCreateRoleHandler(IAccountCreateRoleRepository repositoryAccountCreateRole)
+    public RoleCreateHandler(IRoleCreateRepository repositoryAccountCreateRole)
     {
         _repositoryAccountCreateRole = repositoryAccountCreateRole;
     }
 
-    public ICommandResult Handle(AccountCreateRoleCommand command)
+    public ICommandResult Handle(RoleCreateCommand command)
     {
         #region 01. Valida a requisição.
         try
@@ -73,6 +73,6 @@ public class AccountCreateRoleHandler : Notifiable<Notification>, IHandler<Accou
         var listRoleObject = new List<RoleResponse>();
         listRoleObject.Add(roleResponse);
 
-        return new AccountRoleCommandResult(true, "Conta criada com sucesso!", listRoleObject);
+        return new RoleCommandResult(true, "Conta criada com sucesso!", listRoleObject);
     }
 }

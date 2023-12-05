@@ -2,7 +2,7 @@
 
 namespace JwtStore.Account.Repositories;
 
-public interface IAccountCreateUserRepository
+public interface IUserCreateRepository
 {
     Task<bool> AnyAsync(string email);
     Task SaveAsync(User user);

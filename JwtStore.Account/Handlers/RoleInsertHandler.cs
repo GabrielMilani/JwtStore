@@ -9,16 +9,16 @@ using JwtStore.Shared.Handlers;
 
 namespace JwtStore.Account.Handlers;
 
-public class AccountInsertRoleHandler : Notifiable<Notification>, IHandler<AccountInsertRoleCommand>
+public class RoleInsertHandler : Notifiable<Notification>, IHandler<RoleInsertCommand>
 {
-    private readonly IAccountInsertRoleRepository _repositoryAccountInsertRole;
+    private readonly IRoleInsertRepository _repositoryAccountInsertRole;
 
-    public AccountInsertRoleHandler(IAccountInsertRoleRepository repositoryAccountInsertRole)
+    public RoleInsertHandler(IRoleInsertRepository repositoryAccountInsertRole)
     {
         _repositoryAccountInsertRole = repositoryAccountInsertRole;
     }
 
-    public ICommandResult Handle(AccountInsertRoleCommand command)
+    public ICommandResult Handle(RoleInsertCommand command)
     {
         #region 01. Valida a requisição.
         try
@@ -89,6 +89,6 @@ public class AccountInsertRoleHandler : Notifiable<Notification>, IHandler<Accou
         {
             listRoleResponse.Add(new RoleResponse(role.Id, role.Title));
         }
-        return new AccountRoleCommandResult(true, "Roles add success!", listRoleResponse);
+        return new RoleCommandResult(true, "Roles add success!", listRoleResponse);
     }
 }

@@ -9,24 +9,32 @@ namespace JwtStore.Api.Controllers;
 [ApiController]
 public class AccountControllers : ControllerBase
 {
+    #region Create account
     [HttpPost("v1/accounts")]
-    public ICommandResult Post([FromBody] AccountCreateUserCommand userCommand,
-                               [FromServices] AccountCreateUserHandler userHandler)
+    public ICommandResult Post([FromBody] UserCreateCommand userCommand,
+                               [FromServices] UserCreateHandler userHandler)
     {
-        return (AccountUserCommandResult)userHandler.Handle(userCommand);
+        return (UserCommandResult)userHandler.Handle(userCommand);
     }
+    #endregion
 
+    #region Login account
     [HttpGet("v1/accounts")]
-    public ICommandResult Get([FromBody] AccountAuthenticateCommand command,
-                              [FromServices] AccountAuthenticateHandler handler)
+    public ICommandResult Get([FromBody] AuthenticateCommand command,
+                              [FromServices] AuthenticateHandler handler)
     {
-        return (AccountAuthenticateCommandResult)handler.Handle(command);
+        return (AuthenticateCommandResult)handler.Handle(command);
     }
+    #endregion
+
+    #region Insert Roles in Users
     [HttpPut("v1/accounts/roles")]
-    public ICommandResult Get([FromBody] AccountInsertRoleCommand command,
-        [FromServices] AccountInsertRoleHandler handler)
+    public ICommandResult Get([FromBody] RoleInsertCommand command,
+                              [FromServices] RoleInsertHandler handler)
     {
-        return (AccountRoleCommandResult)handler.Handle(command);
+        return (RoleCommandResult)handler.Handle(command);
     }
+    #endregion
+
 
 }
