@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace JwtStore.Infra.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20231204190253_InitialCreate")]
+    [Migration("20231206185349_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -24,6 +24,67 @@ namespace JwtStore.Infra.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("JwtStore.Account.Entities.Address", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("id");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("City")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("NVARCHAR")
+                        .HasColumnName("City");
+
+                    b.Property<string>("Country")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("NVARCHAR")
+                        .HasColumnName("Country");
+
+                    b.Property<string>("Neighborhood")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("NVARCHAR")
+                        .HasColumnName("Neighborhood");
+
+                    b.Property<string>("Number")
+                        .IsRequired()
+                        .HasMaxLength(10)
+                        .HasColumnType("NVARCHAR")
+                        .HasColumnName("Number");
+
+                    b.Property<string>("State")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("NVARCHAR")
+                        .HasColumnName("State");
+
+                    b.Property<string>("Street")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("NVARCHAR")
+                        .HasColumnName("Title");
+
+                    b.Property<int?>("UserId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ZipCode")
+                        .IsRequired()
+                        .HasMaxLength(8)
+                        .HasColumnType("NVARCHAR")
+                        .HasColumnName("ZipCode");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Address", (string)null);
+                });
 
             modelBuilder.Entity("JwtStore.Account.Entities.Role", b =>
                 {
@@ -150,8 +211,41 @@ namespace JwtStore.Infra.Migrations
                     b.ToTable("UserRole");
                 });
 
+            modelBuilder.Entity("JwtStore.Account.Entities.Address", b =>
+                {
+                    b.HasOne("JwtStore.Account.Entities.User", "User")
+                        .WithMany("Addresses")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .HasConstraintName("FK_Address_User");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("JwtStore.Account.Entities.User", b =>
                 {
+                    b.OwnsOne("JwtStore.Account.ValueObjects.Document", "Document", b1 =>
+                        {
+                            b1.Property<int>("UserId")
+                                .HasColumnType("int");
+
+                            b1.Property<string>("Number")
+                                .IsRequired()
+                                .HasColumnType("nvarchar(max)")
+                                .HasColumnName("Document");
+
+                            b1.Property<int>("Type")
+                                .HasColumnType("int")
+                                .HasColumnName("DocumentType");
+
+                            b1.HasKey("UserId");
+
+                            b1.ToTable("User");
+
+                            b1.WithOwner()
+                                .HasForeignKey("UserId");
+                        });
+
                     b.OwnsOne("JwtStore.Account.ValueObjects.Email", "Email", b1 =>
                         {
                             b1.Property<int>("UserId")
@@ -200,6 +294,9 @@ namespace JwtStore.Infra.Migrations
                                 .HasForeignKey("UserId");
                         });
 
+                    b.Navigation("Document")
+                        .IsRequired();
+
                     b.Navigation("Email")
                         .IsRequired();
 
@@ -232,6 +329,11 @@ namespace JwtStore.Infra.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("JwtStore.Account.Entities.User", b =>
+                {
+                    b.Navigation("Addresses");
                 });
 
             modelBuilder.Entity("JwtStore.Stock.Entities.Category", b =>

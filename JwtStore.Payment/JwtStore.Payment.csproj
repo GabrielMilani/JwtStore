@@ -7,16 +7,18 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="flunt" Version="2.0.5" />
-    <PackageReference Include="SecureIdentity" Version="1.0.4" />
+    <PackageReference Include="Flunt" Version="2.0.5" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Handlers\" />
+    <Folder Include="Commands\" />
+    <Folder Include="Queries\" />
+    <Folder Include="Repositories\" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\JwtStore.Shared\JwtStore.Shared.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Enums\" />
   </ItemGroup>
 
 </Project>

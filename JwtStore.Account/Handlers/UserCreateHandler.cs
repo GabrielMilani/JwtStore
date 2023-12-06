@@ -37,13 +37,15 @@ public class UserCreateHandler : Notifiable<Notification>, IHandler<UserCreateCo
         #region 02. Recebe perfil do usuário.
         Email email;
         Password password;
+        Document document;
         User user;
 
         try
         {
             email = new Email(command.Email);
             password = new Password(PasswordHasher.Hash(command.Password));
-            user = new User(command.Name, email, password);
+            document = new Document(command.Document, command.DocumentType); ;
+            user = new User(command.Name, email, password, document);
         }
         catch
         {

@@ -47,7 +47,9 @@ namespace JwtStore.Infra.Migrations
                     Email = table.Column<string>(type: "NVARCHAR(120)", maxLength: 120, nullable: false),
                     EmailResetCode = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Password = table.Column<string>(type: "NVARCHAR(120)", maxLength: 120, nullable: false),
-                    PasswordResetCode = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    PasswordResetCode = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Document = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    DocumentType = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -80,6 +82,32 @@ namespace JwtStore.Infra.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Address",
+                columns: table => new
+                {
+                    id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Title = table.Column<string>(type: "NVARCHAR(100)", maxLength: 100, nullable: false),
+                    Number = table.Column<string>(type: "NVARCHAR(10)", maxLength: 10, nullable: false),
+                    Neighborhood = table.Column<string>(type: "NVARCHAR(100)", maxLength: 100, nullable: false),
+                    City = table.Column<string>(type: "NVARCHAR(100)", maxLength: 100, nullable: false),
+                    State = table.Column<string>(type: "NVARCHAR(100)", maxLength: 100, nullable: false),
+                    Country = table.Column<string>(type: "NVARCHAR(100)", maxLength: 100, nullable: false),
+                    ZipCode = table.Column<string>(type: "NVARCHAR(8)", maxLength: 8, nullable: false),
+                    UserId = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Address", x => x.id);
+                    table.ForeignKey(
+                        name: "FK_Address_User",
+                        column: x => x.UserId,
+                        principalTable: "User",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "UserRole",
                 columns: table => new
                 {
@@ -104,6 +132,11 @@ namespace JwtStore.Infra.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_Address_UserId",
+                table: "Address",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Product_CategoryId",
                 table: "Product",
                 column: "CategoryId");
@@ -117,6 +150,9 @@ namespace JwtStore.Infra.Migrations
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "Address");
+
             migrationBuilder.DropTable(
                 name: "Product");
 

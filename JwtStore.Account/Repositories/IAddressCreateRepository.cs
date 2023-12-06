@@ -2,7 +2,7 @@
 
 namespace JwtStore.Account.Repositories;
 
-public interface IRoleSelectRepository
+public interface IAddressCreateRepository
 {
-    Task<Role?> GetById(int roleId);
+    Task SaveAsync(Address address);
 }

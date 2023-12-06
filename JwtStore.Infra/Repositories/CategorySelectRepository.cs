@@ -14,7 +14,6 @@ public class CategorySelectRepository : ICategorySelectRepository
         => _context = context;
 
     public async Task<Category?> GetById(int id)
-    {
-        return await _context.Categories.FirstOrDefaultAsync(CategoryQueries.GetById(id));
-    }
+        => await _context.Categories.FirstOrDefaultAsync(CategoryQueries.GetById(id));
+
 }

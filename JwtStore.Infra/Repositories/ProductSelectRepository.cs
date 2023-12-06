@@ -14,7 +14,6 @@ public class ProductSelectRepository : IProductSelectRepository
         => _context = context;
 
     public async Task<Product?> GetById(int id)
-    {
-        return await _context.Products.FirstOrDefaultAsync(ProductQueries.GetById(id));
-    }
+        => await _context.Products.FirstOrDefaultAsync(ProductQueries.GetById(id));
+
 }

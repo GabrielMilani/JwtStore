@@ -1,22 +1,27 @@
 ﻿using Flunt.Notifications;
 using Flunt.Validations;
+using JwtStore.Account.Enums;
 using JwtStore.Shared.Commands;
 
 namespace JwtStore.Account.Commands;
 
 public class UserCreateCommand : Notifiable<Notification>, ICommand
 {
-    public UserCreateCommand(string name, string email, string password)
+    public UserCreateCommand(string name, string email, string document, EDocumentType documentType,
+                             string password)
     {
         Name = name;
         Email = email;
+        Document = document;
+        DocumentType = documentType;
         Password = password;
     }
 
     public string Name { get; set; }
     public string Email { get; set; }
+    public string Document { get; private set; }
+    public EDocumentType DocumentType { get; private set; }
     public string Password { get; set; }
-
     public void Validate()
     {
         AddNotifications(new Contract<Notification>()

@@ -70,9 +70,9 @@ public class RoleCreateHandler : Notifiable<Notification>, IHandler<RoleCreateCo
         #endregion 
 
         var roleResponse = new RoleResponse(role.Id, role.Title);
-        var listRoleObject = new List<RoleResponse>();
-        listRoleObject.Add(roleResponse);
+        var listRoleResponse = new List<RoleResponse>();
+        listRoleResponse.Add(roleResponse);
 
-        return new RoleCommandResult(true, "Conta criada com sucesso!", listRoleObject);
+        return new RoleCommandResult(true, "Conta criada com sucesso!", listRoleResponse);
     }
 }

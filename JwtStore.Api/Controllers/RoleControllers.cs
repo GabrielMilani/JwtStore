@@ -42,7 +42,7 @@ public class RoleControllers : ControllerBase
 
     [HttpGet("v1/roles/{id:int}")]
     public ICommandResult GetById([FromRoute] int id,
-                                  [FromServices] ISelectRoleRepository roleSelect)
+                                  [FromServices] IRoleSelectRepository roleSelect)
     {
         var role = roleSelect.GetById(id).Result;
         if (role is null)

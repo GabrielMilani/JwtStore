@@ -3,25 +3,24 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JwtStore.Account", "JwtStore.Account\JwtStore.Account.csproj", "{9B17D02D-CBFB-4086-9054-AB42787EE627}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JwtStore.Account", "JwtStore.Account\JwtStore.Account.csproj", "{9B17D02D-CBFB-4086-9054-AB42787EE627}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JwtStore.Infra", "JwtStore.Infra\JwtStore.Infra.csproj", "{01DD8B30-7DFA-4D04-A93E-A3FF5EC13139}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JwtStore.Infra", "JwtStore.Infra\JwtStore.Infra.csproj", "{01DD8B30-7DFA-4D04-A93E-A3FF5EC13139}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JwtStore.Shared", "JwtStore.Shared\JwtStore.Shared.csproj", "{59612FBE-893E-47AC-A905-A161BB382D43}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JwtStore.Shared", "JwtStore.Shared\JwtStore.Shared.csproj", "{59612FBE-893E-47AC-A905-A161BB382D43}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JwtStore.Test", "JwtStore.Test\JwtStore.Test.csproj", "{701A9A0F-42A8-42AC-AB9D-FF15EFCCBCB2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JwtStore.Test", "JwtStore.Test\JwtStore.Test.csproj", "{701A9A0F-42A8-42AC-AB9D-FF15EFCCBCB2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JwtStore.Api", "JwtStore.Api\JwtStore.Api.csproj", "{DCE5A026-B3F3-4993-B7A6-923A0CD98BDC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JwtStore.Api", "JwtStore.Api\JwtStore.Api.csproj", "{DCE5A026-B3F3-4993-B7A6-923A0CD98BDC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JwtStore.Stock", "JwtStore.Stock\JwtStore.Stock.csproj", "{CDDE1311-69F3-4C34-A82D-DBB879C87C82}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JwtStore.Stock", "JwtStore.Stock\JwtStore.Stock.csproj", "{CDDE1311-69F3-4C34-A82D-DBB879C87C82}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JwtStore.Order", "JwtStore.Sell\JwtStore.Order.csproj", "{17FCCC4F-920E-4D1C-A67A-804DCA6C7D39}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
-	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{9B17D02D-CBFB-4086-9054-AB42787EE627}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -48,5 +47,15 @@ Global
 		{CDDE1311-69F3-4C34-A82D-DBB879C87C82}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CDDE1311-69F3-4C34-A82D-DBB879C87C82}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CDDE1311-69F3-4C34-A82D-DBB879C87C82}.Release|Any CPU.Build.0 = Release|Any CPU
+		{17FCCC4F-920E-4D1C-A67A-804DCA6C7D39}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{17FCCC4F-920E-4D1C-A67A-804DCA6C7D39}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{17FCCC4F-920E-4D1C-A67A-804DCA6C7D39}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{17FCCC4F-920E-4D1C-A67A-804DCA6C7D39}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {BC5E0879-3454-4621-AF13-0A760F7FEC84}
 	EndGlobalSection
 EndGlobal

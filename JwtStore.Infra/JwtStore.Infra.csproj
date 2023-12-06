@@ -18,10 +18,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Data\Mappings\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\JwtStore.Account\JwtStore.Account.csproj" />
     <ProjectReference Include="..\JwtStore.Stock\JwtStore.Stock.csproj" />
   </ItemGroup>

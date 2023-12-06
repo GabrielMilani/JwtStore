@@ -14,12 +14,14 @@ public class AppDbContext : DbContext
 
     public DbSet<User> Users { get; set; } = null!;
     public DbSet<Role> Roles { get; set; } = null!;
+    public DbSet<Address> Addresses { get; set; } = null!;
     public DbSet<Category> Categories { get; set; } = null!;
     public DbSet<Product> Products { get; set; } = null!;
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.ApplyConfiguration(new UserMap());
         modelBuilder.ApplyConfiguration(new RoleMap());
+        modelBuilder.ApplyConfiguration(new AddressMap());
         modelBuilder.ApplyConfiguration(new CategoryMap());
         modelBuilder.ApplyConfiguration(new ProductMap());
     }

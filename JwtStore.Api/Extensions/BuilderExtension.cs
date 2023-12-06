@@ -73,9 +73,12 @@ public static class BuilderExtension
         builder.Services.AddTransient<RoleInsertHandler, RoleInsertHandler>();
         builder.Services.AddTransient<IRoleCreateRepository, RoleCreateRepository>();
         builder.Services.AddTransient<RoleCreateHandler, RoleCreateHandler>();
+        builder.Services.AddTransient<IAddressCreateRepository, AddressCreateRepository>();
+        builder.Services.AddTransient<AddressCreateHandler, AddressCreateHandler>();
         builder.Services.AddTransient<ICategorySelectRepository, CategorySelectRepository>();
         builder.Services.AddTransient<IProductSelectRepository, ProductSelectRepository>();
-        builder.Services.AddTransient<ISelectRoleRepository, RoleSelectRepository>();
+        builder.Services.AddTransient<IRoleSelectRepository, RoleSelectRepository>();
+        builder.Services.AddTransient<IAddressSelectRepository, AddressSelectRepository>();
     }
     public static void AddServices(this WebApplicationBuilder builder)
     {
