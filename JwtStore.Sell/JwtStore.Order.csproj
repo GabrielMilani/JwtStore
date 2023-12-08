@@ -11,15 +11,14 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\JwtStore.Account\JwtStore.Account.csproj" />
     <ProjectReference Include="..\JwtStore.Shared\JwtStore.Shared.csproj" />
+    <ProjectReference Include="..\JwtStore.Stock\JwtStore.Stock.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Commands\" />
     <Folder Include="Entities\" />
-    <Folder Include="Handlers\" />
     <Folder Include="Queries\" />
-    <Folder Include="Repositories\" />
   </ItemGroup>
 
 </Project>

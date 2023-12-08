@@ -1,5 +1,4 @@
 ﻿using JwtStore.Account.Commands;
-using JwtStore.Account.Commands.Results;
 using JwtStore.Account.Handlers;
 using JwtStore.Shared.Commands;
 using Microsoft.AspNetCore.Mvc;
@@ -14,7 +13,7 @@ public class AccountControllers : ControllerBase
     public ICommandResult Post([FromBody] UserCreateCommand userCommand,
                                [FromServices] UserCreateHandler userHandler)
     {
-        return (UserCommandResult)userHandler.Handle(userCommand);
+        return (ICommandResult)userHandler.Handle(userCommand);
     }
     #endregion
 
@@ -23,7 +22,7 @@ public class AccountControllers : ControllerBase
     public ICommandResult Get([FromBody] AuthenticateCommand command,
                               [FromServices] AuthenticateHandler handler)
     {
-        return (AuthenticateCommandResult)handler.Handle(command);
+        return (ICommandResult)handler.Handle(command);
     }
     #endregion
 
@@ -32,7 +31,7 @@ public class AccountControllers : ControllerBase
     public ICommandResult Get([FromBody] RoleInsertCommand command,
                               [FromServices] RoleInsertHandler handler)
     {
-        return (RoleCommandResult)handler.Handle(command);
+        return (ICommandResult)handler.Handle(command);
     }
     #endregion
 

@@ -19,6 +19,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\JwtStore.Account\JwtStore.Account.csproj" />
+    <ProjectReference Include="..\JwtStore.Sell\JwtStore.Order.csproj" />
     <ProjectReference Include="..\JwtStore.Stock\JwtStore.Stock.csproj" />
   </ItemGroup>
 

@@ -15,7 +15,7 @@ public class AuthenticateHandler : Notifiable<Notification>, IHandler<Authentica
     private readonly IAuthenticateRepository _repositoryAccountAuthenticate;
     private readonly IAuthenticateTokenService _tokenServiceAccountAuthenticate;
     public AuthenticateHandler(IAuthenticateRepository repositoryAccountAuthenticate,
-                                      IAuthenticateTokenService accountAuthenticateTokenService)
+                               IAuthenticateTokenService accountAuthenticateTokenService)
     {
         _repositoryAccountAuthenticate = repositoryAccountAuthenticate;
         _tokenServiceAccountAuthenticate = accountAuthenticateTokenService;

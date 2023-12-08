@@ -123,6 +123,103 @@ namespace JwtStore.Infra.Migrations
                     b.ToTable("User", (string)null);
                 });
 
+            modelBuilder.Entity("JwtStore.Order.Entities.Delivery", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("id");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("CreateDate")
+                        .HasMaxLength(60)
+                        .HasColumnType("SMALLDATETIME")
+                        .HasColumnName("CreateDate");
+
+                    b.Property<DateTime>("EstimatedDeliveryDate")
+                        .HasMaxLength(60)
+                        .HasColumnType("SMALLDATETIME")
+                        .HasColumnName("EstimatedDate");
+
+                    b.Property<int?>("OrderId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int")
+                        .HasColumnName("Status");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("OrderId");
+
+                    b.ToTable("Delivery", (string)null);
+                });
+
+            modelBuilder.Entity("JwtStore.Order.Entities.Order", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("id");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("CreateDate")
+                        .HasMaxLength(60)
+                        .HasColumnType("SMALLDATETIME")
+                        .HasColumnName("CreateDate");
+
+                    b.Property<int?>("CustomerId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int")
+                        .HasColumnName("Status");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CustomerId");
+
+                    b.ToTable("Order", (string)null);
+                });
+
+            modelBuilder.Entity("JwtStore.Order.Entities.OrderItem", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("id");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int?>("OrderId")
+                        .HasColumnType("int");
+
+                    b.Property<decimal?>("Price")
+                        .IsRequired()
+                        .HasPrecision(10, 2)
+                        .HasColumnType("NUMERIC")
+                        .HasColumnName("Price");
+
+                    b.Property<int?>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<decimal?>("Quantity")
+                        .IsRequired()
+                        .HasPrecision(10, 2)
+                        .HasColumnType("NUMERIC")
+                        .HasColumnName("Quantity");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("OrderId");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("OrderItem", (string)null);
+                });
+
             modelBuilder.Entity("JwtStore.Stock.Entities.Category", b =>
                 {
                     b.Property<int>("Id")
@@ -301,6 +398,35 @@ namespace JwtStore.Infra.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("JwtStore.Order.Entities.Delivery", b =>
+                {
+                    b.HasOne("JwtStore.Order.Entities.Order", null)
+                        .WithMany("Deliveries")
+                        .HasForeignKey("OrderId");
+                });
+
+            modelBuilder.Entity("JwtStore.Order.Entities.Order", b =>
+                {
+                    b.HasOne("JwtStore.Account.Entities.User", "Customer")
+                        .WithMany()
+                        .HasForeignKey("CustomerId");
+
+                    b.Navigation("Customer");
+                });
+
+            modelBuilder.Entity("JwtStore.Order.Entities.OrderItem", b =>
+                {
+                    b.HasOne("JwtStore.Order.Entities.Order", null)
+                        .WithMany("Items")
+                        .HasForeignKey("OrderId");
+
+                    b.HasOne("JwtStore.Stock.Entities.Product", "Product")
+                        .WithMany()
+                        .HasForeignKey("ProductId");
+
+                    b.Navigation("Product");
+                });
+
             modelBuilder.Entity("JwtStore.Stock.Entities.Product", b =>
                 {
                     b.HasOne("JwtStore.Stock.Entities.Category", "Category")
@@ -331,6 +457,13 @@ namespace JwtStore.Infra.Migrations
             modelBuilder.Entity("JwtStore.Account.Entities.User", b =>
                 {
                     b.Navigation("Addresses");
+                });
+
+            modelBuilder.Entity("JwtStore.Order.Entities.Order", b =>
+                {
+                    b.Navigation("Deliveries");
+
+                    b.Navigation("Items");
                 });
 
             modelBuilder.Entity("JwtStore.Stock.Entities.Category", b =>

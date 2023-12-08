@@ -4,6 +4,8 @@ using JwtStore.Account.Services;
 using JwtStore.Infra.Data;
 using JwtStore.Infra.Repositories;
 using JwtStore.Infra.Services;
+using JwtStore.Order.Handlers;
+using JwtStore.Order.Repositories;
 using JwtStore.Shared;
 using JwtStore.Stock.Handlers;
 using JwtStore.Stock.Repositories;
@@ -75,6 +77,16 @@ public static class BuilderExtension
         builder.Services.AddTransient<RoleCreateHandler, RoleCreateHandler>();
         builder.Services.AddTransient<IAddressCreateRepository, AddressCreateRepository>();
         builder.Services.AddTransient<AddressCreateHandler, AddressCreateHandler>();
+
+        builder.Services.AddTransient<IOrderCreateRepository, OrderCreateRepository>();
+        builder.Services.AddTransient<OrderCreateHandler, OrderCreateHandler>();
+        builder.Services.AddTransient<IOrderItemsInsertRepository, OrderInsertItemsRepository>();
+        builder.Services.AddTransient<OrderItemsInsertHandler, OrderItemsInsertHandler>();
+        builder.Services.AddTransient<IOrderPaymentRepository, OrderPaymentRepository>();
+        builder.Services.AddTransient<OrderPaymentHandler, OrderPaymentHandler>();
+        builder.Services.AddTransient<IOrderCloseRepository, OrderCloseRepository>();
+        builder.Services.AddTransient<OrderCloseHandler, OrderCloseHandler>();
+
         builder.Services.AddTransient<ICategorySelectRepository, CategorySelectRepository>();
         builder.Services.AddTransient<IProductSelectRepository, ProductSelectRepository>();
         builder.Services.AddTransient<IRoleSelectRepository, RoleSelectRepository>();

@@ -17,7 +17,7 @@ public class AddressControllers : ControllerBase
     public ICommandResult Post([FromBody] AddressCreateCommand command,
                                [FromServices] AddressCreateHandler handler)
     {
-        return (RoleCommandResult)handler.Handle(command);
+        return (ICommandResult)handler.Handle(command);
     }
     #endregion
 

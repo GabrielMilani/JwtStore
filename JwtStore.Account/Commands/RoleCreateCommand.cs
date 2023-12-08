@@ -17,7 +17,7 @@ public class RoleCreateCommand : Notifiable<Notification>, ICommand
     {
         AddNotifications(new Contract<Notification>()
             .Requires()
-            .IsLowerThan(Title.Length, 40, "Password", "A senha deve conter menos que 40 caracteres")
-            .IsGreaterThan(Title.Length, 6, "Password", "A senha deve conter mais que 6 caracteres"));
+            .IsLowerThan(Title.Length, 40, "Title", "A Title deve conter menos que 40 caracteres")
+            .IsGreaterThan(Title.Length, 3, "Title", "A Title deve conter mais que 6 caracteres"));
     }
 }

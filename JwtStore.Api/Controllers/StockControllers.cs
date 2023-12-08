@@ -20,7 +20,7 @@ public class StockControllers : ControllerBase
     public ICommandResult Post([FromBody] CategoryCreateCommand command,
         [FromServices] CategoryCreateHandler handler)
     {
-        return (CategoryCommandResult)handler.Handle(command);
+        return (ICommandResult)handler.Handle(command);
     }
     #endregion
 
@@ -30,7 +30,7 @@ public class StockControllers : ControllerBase
     public ICommandResult Put([FromBody] CategoryUpdateCommand command,
                              [FromServices] CategoryUpdateHandler handler)
     {
-        return (CategoryCommandResult)handler.Handle(command);
+        return (ICommandResult)handler.Handle(command);
     }
     #endregion
 
@@ -70,7 +70,7 @@ public class StockControllers : ControllerBase
     public ICommandResult Post([FromBody] ProductCreateCommand command,
                                [FromServices] ProductCreateHandler handler)
     {
-        return (ProductCommandResult)handler.Handle(command);
+        return (ICommandResult)handler.Handle(command);
     }
     #endregion
 
@@ -80,7 +80,7 @@ public class StockControllers : ControllerBase
     public ICommandResult Put([FromBody] ProductUpdateCommand command,
                               [FromServices] ProductUpdateHandler handler)
     {
-        return (ProductCommandResult)handler.Handle(command);
+        return (ICommandResult)handler.Handle(command);
     }
     #endregion
 

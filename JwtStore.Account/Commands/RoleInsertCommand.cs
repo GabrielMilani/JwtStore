@@ -18,8 +18,8 @@ public class RoleInsertCommand : Notifiable<Notification>, ICommand
     {
         AddNotifications(new Contract<Notification>()
             .Requires()
-            .IsLowerThan(Role.Length, 40, "Password", "A senha deve conter menos que 40 caracteres")
-            .IsGreaterThan(Role.Length, 6, "Password", "A senha deve conter mais que 6 caracteres")
+            .IsLowerThan(Role.Length, 40, "Title", "A Title deve conter menos que 40 caracteres")
+            .IsGreaterThan(Role.Length, 3, "Title", "A Title deve conter mais que 6 caracteres")
             .IsEmail(Email, "Email", "E-mail inválido"));
     }
 }

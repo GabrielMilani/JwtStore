@@ -10,6 +10,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace JwtStore.Api.Controllers;
 
+[ApiController]
 public class RoleControllers : ControllerBase
 {
 
@@ -18,7 +19,7 @@ public class RoleControllers : ControllerBase
     public ICommandResult Post([FromBody] RoleCreateCommand command,
                                [FromServices] RoleCreateHandler handler)
     {
-        return (RoleCommandResult)handler.Handle(command);
+        return (ICommandResult)handler.Handle(command);
     }
     #endregion
 
